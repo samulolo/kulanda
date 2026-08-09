@@ -5,12 +5,8 @@ import { getProductBySlug } from "@/lib/products";
 
 export const runtime = "nodejs";
 
-const FREE_SHIPPING_THRESHOLD = 50;
-const SHIPPING_FEE_CENTS = 490;
-
-const CUPOES: Record<string, { tipo: "percentagem" | "envio-gratis"; percentOff?: number }> = {
+const CUPOES: Record<string, { tipo: "percentagem"; percentOff?: number }> = {
   BEMVINDO10: { tipo: "percentagem", percentOff: 10 },
-  FRETEGRATIS: { tipo: "envio-gratis" },
 };
 
 interface CarrinhoItemInput {
@@ -46,7 +42,6 @@ export async function POST(req: NextRequest) {
   // Guardamos slug + quantidade (validados) para o webhook conseguir
   // reconstruir a encomenda sem ter de voltar a confiar no cliente.
   const itemTokens: string[] = [];
-  let subtotalCents = 0;
   const origin = new URL(req.url).origin;
 
   const MAX_QUANTITY = 20;
@@ -61,7 +56,6 @@ export async function POST(req: NextRequest) {
       Math.min(Math.floor(raw.quantity || minimo), MAX_QUANTITY)
     );
     const unitAmount = Math.round(produto.price * 100);
-    subtotalCents += unitAmount * quantidade;
 
     line_items.push({
       price_data: {
@@ -84,15 +78,13 @@ export async function POST(req: NextRequest) {
   const codigoCupom = body.cupom?.trim().toUpperCase();
   const cupom = codigoCupom ? CUPOES[codigoCupom] : undefined;
 
-  const envioGratis =
-    subtotalCents >= FREE_SHIPPING_THRESHOLD * 100 || cupom?.tipo === "envio-gratis";
-
+  // Envio grátis em todas as encomendas.
   const shipping_options: Stripe.Checkout.SessionCreateParams.ShippingOption[] = [
     {
       shipping_rate_data: {
         type: "fixed_amount",
-        fixed_amount: { amount: envioGratis ? 0 : SHIPPING_FEE_CENTS, currency: "eur" },
-        display_name: envioGratis ? "Envio grátis" : "Portes de envio",
+        fixed_amount: { amount: 0, currency: "eur" },
+        display_name: "Envio grátis",
       },
     },
   ];

@@ -11,14 +11,10 @@ const inputClasses =
   "rounded-sm border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none";
 const inputErrorClasses = "border-red-400 focus:border-red-400";
 
-const FREE_SHIPPING_THRESHOLD = 50;
-const SHIPPING_FEE = 4.9;
-
-type Cupom = { tipo: "percentagem" | "envio-gratis"; valor?: number; label: string };
+type Cupom = { tipo: "percentagem"; valor?: number; label: string };
 
 const CUPOES: Record<string, Cupom> = {
   BEMVINDO10: { tipo: "percentagem", valor: 10, label: "Cupão aplicado: 10% de desconto" },
-  FRETEGRATIS: { tipo: "envio-gratis", label: "Cupão aplicado: portes grátis" },
 };
 
 export default function CheckoutPage() {
@@ -86,11 +82,8 @@ export default function CheckoutPage() {
 
   const subtotal = totalPrice;
   const cupom = cupomAplicado ? CUPOES[cupomAplicado] : null;
-  const portesBase = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
-  const portes = cupom?.tipo === "envio-gratis" ? 0 : portesBase;
   const desconto = cupom?.tipo === "percentagem" ? subtotal * ((cupom.valor ?? 0) / 100) : 0;
-  const total = Math.max(subtotal + portes - desconto, 0);
-  const faltaParaFrete = FREE_SHIPPING_THRESHOLD - subtotal;
+  const total = Math.max(subtotal - desconto, 0);
 
   if (items.length === 0) {
     return (
@@ -217,18 +210,13 @@ export default function CheckoutPage() {
                 <Truck strokeWidth={1.6} className="h-3.5 w-3.5" />
                 Portes de envio
               </span>
-              <span>{portes === 0 ? "Grátis" : formatPrice(portes)}</span>
+              <span>Grátis</span>
             </div>
             {desconto > 0 && (
               <div className="flex justify-between text-[var(--accent-dark)]">
                 <span>Desconto</span>
                 <span>−{formatPrice(desconto)}</span>
               </div>
-            )}
-            {portes > 0 && faltaParaFrete > 0 && (
-              <p className="text-xs text-[var(--muted)]">
-                Faltam {formatPrice(faltaParaFrete)} para portes grátis.
-              </p>
             )}
           </div>
 

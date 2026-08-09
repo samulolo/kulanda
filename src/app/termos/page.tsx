@@ -54,9 +54,8 @@ export default function TermosPage() {
             Entrega
           </h2>
           <p>
-            Os prazos e custos de entrega são apresentados antes da
-            finalização da compra. Encomendas acima de €50 têm frete
-            gratuito.
+            Os prazos de entrega são apresentados antes da finalização da
+            compra. O envio é grátis em todas as encomendas.
           </p>
         </div>
 

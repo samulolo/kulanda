@@ -1,7 +1,7 @@
 import { Truck, ShieldCheck, CreditCard, RefreshCw } from "lucide-react";
 
 const items = [
-  { label: "Frete grátis acima de €50", Icon: Truck },
+  { label: "Envio grátis em todas as encomendas", Icon: Truck },
   { label: "Garantia de 30 dias", Icon: ShieldCheck },
   { label: "Pagamento seguro via Stripe", Icon: CreditCard },
   { label: "Troca fácil em até 14 dias", Icon: RefreshCw },

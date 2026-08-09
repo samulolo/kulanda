@@ -38,8 +38,25 @@ export async function POST(req: NextRequest) {
   }
 
   switch (event.type) {
-    case "checkout.session.completed": {
+    // "completed" dispara assim que o cliente termina o checkout — para
+    // métodos síncronos (cartão) já vem com o pagamento confirmado, mas
+    // para métodos assíncronos (ex.: MB WAY) pode vir com payment_status
+    // "unpaid" enquanto aguarda a confirmação no telemóvel do cliente.
+    case "checkout.session.completed":
+    // "async_payment_succeeded" é o evento que confirma mesmo o pagamento
+    // nesses casos assíncronos — é aqui que o MB WAY normalmente conclui.
+    case "checkout.session.async_payment_succeeded": {
       await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
+      break;
+    }
+    case "checkout.session.async_payment_failed": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      console.warn(`[stripe] Pagamento assíncrono falhou para a sessão ${session.id}.`);
+      break;
+    }
+    case "checkout.session.expired": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      console.log(`[stripe] Sessão ${session.id} expirou sem pagamento — nada a fazer.`);
       break;
     }
     default:
@@ -53,6 +70,16 @@ async function handleCheckoutCompleted(sessionFromEvent: Stripe.Checkout.Session
   // Voltamos a pedir a sessão à Stripe (em vez de confiar só no payload do
   // webhook) para termos a morada de entrega e os dados do cliente completos.
   const session = await stripe.checkout.sessions.retrieve(sessionFromEvent.id);
+
+  // Proteção essencial para métodos de pagamento assíncronos (MB WAY):
+  // "completed" pode disparar antes da confirmação real do pagamento. Só
+  // gravamos a encomenda quando a Stripe confirma que o dinheiro entrou —
+  // caso contrário aguardamos o evento async_payment_succeeded, que volta
+  // a chamar esta mesma função já com payment_status "paid".
+  if (session.payment_status !== "paid") {
+    console.log(`[stripe] Sessão ${session.id} ainda não paga (status: ${session.payment_status}) — a aguardar confirmação.`);
+    return;
+  }
 
   const reference = session.id.replace("cs_", "").slice(-8).toUpperCase();
   const email = session.customer_details?.email;

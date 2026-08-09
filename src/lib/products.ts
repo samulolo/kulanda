@@ -1,4 +1,4 @@
-export type Category = "microfones" | "carteiras" | "iluminacao" | "gloss";
+export type Category = "microfones" | "carteiras" | "iluminacao" | "gloss" | "tripes";
 
 export interface Product {
   slug: string;
@@ -26,6 +26,7 @@ export const categories: { id: Category; label: string }[] = [
   { id: "microfones", label: "Microfones de Lapela" },
   { id: "iluminacao", label: "Ring Lights Magnéticos" },
   { id: "gloss", label: "Brilho Labial" },
+  { id: "tripes", label: "Tripés e Suportes" },
 ];
 
 export const products: Product[] = [
@@ -277,6 +278,31 @@ export const products: Product[] = [
     badge: "Novo",
     stock: 40,
     minQuantity: 4,
+  },
+  {
+    slug: "kit-content-creator-tripe-selfie-stick",
+    name: "Kit Content Creator - Tripé Selfie Stick com Luz e Controlo Remoto",
+    category: "tripes",
+    price: 18.96,
+    description:
+      "Kit tudo-em-um para criação de conteúdo: tripé e vara de selfie portáteis, com luz de preenchimento incorporada e comando Bluetooth remoto. A luz tem tom quente e rotação de 360°, o suporte abre até 740mm e aceita telemóveis até 185mm de comprimento, e o comando Bluetooth funciona a uma distância de até 10 metros. Serve como tripé de mesa, suporte para transmissões em direto e vara de selfie, tudo dobrável e fácil de transportar.",
+    features: [
+      "Luz de preenchimento com tom quente e rotação 360°",
+      "Comando Bluetooth remoto com alcance até 10 metros",
+      "Extensível até 740mm, aceita telemóveis até 185mm",
+      "3 em 1: tripé de mesa, suporte para diretos e vara de selfie",
+    ],
+    color: "#1c1c1c",
+    emoji: "🎥",
+    image: "/products/tripe-selfie-stick-produto.webp",
+    images: [
+      "/products/tripe-selfie-stick-produto.webp",
+      "/products/tripe-selfie-stick-em-uso.webp",
+    ],
+    video: "/products/tripe-selfie-stick-luz-controlo.mp4",
+    videoTitle: "Kit Content Creator - Tripé Selfie Stick - vídeo demonstrativo",
+    badge: "Novo",
+    stock: 25,
   },
 ];
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductImage from "@/components/ProductImage";
 import TrustBar from "@/components/TrustBar";
-import { products, Product } from "@/lib/products";
+import { products, Product, getCategoryLabel, formatPrice } from "@/lib/products";
 
 const categoryContent: Record<
   Product["category"],
@@ -28,11 +28,16 @@ const categoryContent: Record<
     description:
       "Efeito espelho 3D, fórmula à prova de água e textura não pegajosa. Kit com as cores disponíveis.",
   },
+  tripes: {
+    title: "Tripés e Suportes",
+    description:
+      "Tripé e vara de selfie com luz de preenchimento e comando Bluetooth remoto — 3 em 1 para criar conteúdo.",
+  },
 };
 
 export default function Home() {
   const featuredByCategory = (
-    ["carteiras", "microfones", "iluminacao", "gloss"] as Product["category"][]
+    ["carteiras", "microfones", "iluminacao", "gloss", "tripes"] as Product["category"][]
   )
     .map(
       (category) =>
@@ -48,10 +53,13 @@ export default function Home() {
   const destaques = extra ? [...featuredByCategory, extra] : featuredByCategory;
 
   const carteiraDestaque = products.find(
-    (p) => p.slug === "carteira-magnetica-couro-marrom"
+    (p) => p.slug === "carteira-magnetica-gerle-textura-preta"
   );
   const ringLightDestaque = products.find(
     (p) => p.slug === "ring-light-magnetico-3-em-1"
+  );
+  const glossDestaque = products.find(
+    (p) => p.slug === "brilho-labial-3d-kiko"
   );
 
   return (
@@ -66,9 +74,8 @@ export default function Home() {
           </h1>
           <p className="max-w-md text-[15px] leading-relaxed text-[var(--muted)]">
             Carteiras magnéticas com acabamento premium para o seu iPhone,
-            microfones de lapela com áudio de estúdio e ring lights
-            magnéticos para quem cria conteúdo. Qualidade que se sente ao
-            toque.
+            microfones de lapela, ring lights magnéticos e kits de tripé para
+            quem cria conteúdo. Qualidade que se sente ao toque.
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
             <Link
@@ -101,28 +108,79 @@ export default function Home() {
             >
               Brilho Labial →
             </Link>
+            <Link
+              href="/produtos?categoria=tripes"
+              className="link-underline text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)]"
+            >
+              Tripés →
+            </Link>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="relative grid grid-cols-2 gap-4">
+          <div
+            className="pointer-events-none absolute -inset-6 -z-10 rounded-full opacity-60 blur-3xl"
+            style={{
+              background:
+                "radial-gradient(circle, var(--accent-soft) 0%, transparent 70%)",
+            }}
+          />
+
           {carteiraDestaque && (
-            <ProductImage
-              color={carteiraDestaque.color}
-              emoji={carteiraDestaque.emoji}
-              image={carteiraDestaque.image}
-              alt={carteiraDestaque.name}
-              className="h-64 rounded-sm sm:h-72"
-            />
+            <Link
+              href={`/produtos/${carteiraDestaque.slug}`}
+              className="group relative block"
+            >
+              <ProductImage
+                color={carteiraDestaque.color}
+                emoji={carteiraDestaque.emoji}
+                image={carteiraDestaque.image}
+                alt={carteiraDestaque.name}
+                priority
+                className="h-64 rounded-sm shadow-[0_25px_50px_-20px_rgba(28,26,23,0.35)] transition-transform duration-500 group-hover:-translate-y-1 sm:h-[21.5rem]"
+              />
+              <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-medium text-[var(--foreground)] shadow-sm backdrop-blur">
+                {getCategoryLabel(carteiraDestaque.category)} · {formatPrice(carteiraDestaque.price)}
+              </span>
+            </Link>
           )}
-          {ringLightDestaque && (
-            <ProductImage
-              color={ringLightDestaque.color}
-              emoji={ringLightDestaque.emoji}
-              image={ringLightDestaque.image}
-              alt={ringLightDestaque.name}
-              className="mt-8 h-64 rounded-sm sm:h-72"
-            />
-          )}
+
+          <div className="mt-8 flex flex-col gap-4">
+            {ringLightDestaque && (
+              <Link
+                href={`/produtos/${ringLightDestaque.slug}`}
+                className="group relative block"
+              >
+                <ProductImage
+                  color={ringLightDestaque.color}
+                  emoji={ringLightDestaque.emoji}
+                  image={ringLightDestaque.image}
+                  alt={ringLightDestaque.name}
+                  className="h-32 rounded-sm shadow-[0_20px_40px_-20px_rgba(28,26,23,0.3)] transition-transform duration-500 group-hover:-translate-y-1 sm:h-40"
+                />
+                <span className="absolute bottom-2 left-2 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-medium text-[var(--foreground)] shadow-sm backdrop-blur">
+                  {getCategoryLabel(ringLightDestaque.category)}
+                </span>
+              </Link>
+            )}
+            {glossDestaque && (
+              <Link
+                href={`/produtos/${glossDestaque.slug}`}
+                className="group relative block"
+              >
+                <ProductImage
+                  color={glossDestaque.color}
+                  emoji={glossDestaque.emoji}
+                  image={glossDestaque.image}
+                  alt={glossDestaque.name}
+                  className="h-32 rounded-sm shadow-[0_20px_40px_-20px_rgba(28,26,23,0.3)] transition-transform duration-500 group-hover:-translate-y-1 sm:h-40"
+                />
+                <span className="absolute bottom-2 left-2 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-medium text-[var(--foreground)] shadow-sm backdrop-blur">
+                  {getCategoryLabel(glossDestaque.category)}
+                </span>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 
@@ -152,7 +210,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {(Object.keys(categoryContent) as Product["category"][]).map(
           (category) => (
             <Link

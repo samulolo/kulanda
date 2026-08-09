@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Smartphone, Mic, Wallet, Aperture, Sparkles } from "lucide-react";
+import { Smartphone, Mic, Wallet, Aperture, Sparkles, Video } from "lucide-react";
 
 interface ProductImageProps {
   color: string;
@@ -9,6 +9,7 @@ interface ProductImageProps {
   className?: string;
   iconClassName?: string;
   sizes?: string;
+  priority?: boolean;
 }
 
 export default function ProductImage({
@@ -19,6 +20,7 @@ export default function ProductImage({
   className = "",
   iconClassName = "h-24 w-24",
   sizes = "(max-width: 768px) 50vw, 400px",
+  priority = false,
 }: ProductImageProps) {
   if (image) {
     return (
@@ -30,6 +32,7 @@ export default function ProductImage({
           alt={alt}
           fill
           sizes={sizes}
+          priority={priority}
           className="object-cover"
         />
       </div>
@@ -45,7 +48,9 @@ export default function ProductImage({
           ? Aperture
           : emoji === "💄"
             ? Sparkles
-            : Smartphone;
+            : emoji === "🎥"
+              ? Video
+              : Smartphone;
 
   return (
     <div

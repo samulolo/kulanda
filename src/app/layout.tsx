@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     "microfone de lapela sem fio",
     "ring light magnético",
     "brilho labial 3d",
+    "tripé selfie stick com luz",
     "acessórios iphone premium",
     "kulanda",
   ],

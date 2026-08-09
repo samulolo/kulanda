@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   getProductBySlug,
-  formatPrice,
   getCategoryLabel,
   getVariants,
-  products,
+  getAllProducts,
 } from "@/lib/products";
+import { formatPrice } from "@/lib/format";
 import ProductZoom from "@/components/ProductZoom";
 import ProductGallery from "@/components/ProductGallery";
 import ProductVideo from "@/components/ProductVideo";
@@ -16,7 +16,8 @@ import AddToCartControls from "@/components/AddToCartControls";
 import { ProductTrustBadges } from "@/components/TrustSignals";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const products = await getAllProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
@@ -26,7 +27,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) return {};
 
@@ -61,11 +62,12 @@ export default async function ProdutoPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) notFound();
 
-  const variants = getVariants(product);
+  const variants = await getVariants(product);
+  const categoryLabel = await getCategoryLabel(product.category);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -80,10 +82,8 @@ export default async function ProdutoPage({
       url: `${SITE_URL}/produtos/${product.slug}`,
       priceCurrency: "EUR",
       price: product.price,
-      availability:
-        product.stock > 0
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
+      // Não fazemos gestão de stock — presume-se sempre disponível.
+      availability: "https://schema.org/InStock",
     },
   };
 
@@ -147,7 +147,7 @@ export default async function ProdutoPage({
               </span>
             )}
             <p className="mt-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-              {getCategoryLabel(product.category)}
+              {categoryLabel}
             </p>
             <h1 className="mt-1 font-serif text-2xl leading-tight text-[var(--foreground)] sm:text-3xl">
               {product.name}

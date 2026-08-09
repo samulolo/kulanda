@@ -30,10 +30,10 @@ export default function ContactoPage() {
           <Mail strokeWidth={1.4} className="h-5 w-5 text-[var(--accent)]" />
           <p className="text-sm font-medium text-[var(--foreground)]">E-mail</p>
           <a
-            href="mailto:geral@kulanda.pt"
+            href="mailto:geral@kulanda-store.com"
             className="link-underline text-sm text-[var(--muted)]"
           >
-            geral@kulanda.pt
+            geral@kulanda-store.com
           </a>
         </div>
         <div className="flex flex-col gap-2 border border-[var(--border)] bg-[var(--surface)] p-6">

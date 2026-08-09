@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Product } from "@/lib/products";
+import type { Product } from "@/lib/products";
 
 interface ColorSwatchesProps {
   current: Product;

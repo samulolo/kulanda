@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
-import { categories } from "@/lib/products";
+import { getCategories } from "@/lib/products";
 import { PaymentMethods } from "./TrustSignals";
 
-export default function Footer() {
+export default async function Footer() {
+  const categories = await getCategories();
+
   return (
     <footer className="mt-24 border-t border-[var(--border)] bg-[var(--foreground)] text-white/70">
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8">

@@ -4,7 +4,7 @@ import { useState, FormEvent } from "react";
 import Link from "next/link";
 import { Lock, Tag, Truck, Loader2 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { formatPrice } from "@/lib/products";
+import { formatPrice } from "@/lib/format";
 import { PaymentMethods, SecureCheckoutBadge } from "@/components/TrustSignals";
 
 const inputClasses =
@@ -161,7 +161,7 @@ export default function CheckoutPage() {
           <button
             type="submit"
             disabled={aEnviar}
-            className="flex items-center justify-center gap-2 rounded-full bg-[var(--foreground)] px-5 py-4 text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)] disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-lift flex items-center justify-center gap-2 rounded-full bg-[var(--foreground)] px-5 py-4 text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {aEnviar && <Loader2 className="h-4 w-4 animate-spin" />}
             {aEnviar ? "A redirecionar para a Stripe…" : `Pagar com Stripe — ${formatPrice(total)}`}

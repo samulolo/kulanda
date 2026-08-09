@@ -61,8 +61,8 @@ export default function PrivacidadePage() {
           <p>
             Pode a qualquer momento pedir acesso, correção ou eliminação dos
             seus dados pessoais, contactando-nos através de{" "}
-            <a href="mailto:geral@kulanda.pt" className="link-underline text-[var(--foreground)]">
-              geral@kulanda.pt
+            <a href="mailto:geral@kulanda-store.com" className="link-underline text-[var(--foreground)]">
+              geral@kulanda-store.com
             </a>
             .
           </p>

@@ -1,41 +1,61 @@
 import Link from "next/link";
+import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
-import ProductImage from "@/components/ProductImage";
 import TrustBar from "@/components/TrustBar";
-import { products, Product, getCategoryLabel, formatPrice } from "@/lib/products";
+import { getAllProducts, type Product } from "@/lib/products";
 
-const categoryContent: Record<
-  Product["category"],
-  { title: string; description: string }
-> = {
-  carteiras: {
+const categoryTiles: {
+  id: Product["category"];
+  title: string;
+  description: string;
+  image: string;
+  span: string;
+}[] = [
+  {
+    id: "carteiras",
     title: "Carteiras Magnéticas",
     description:
       "Material Finewoven, ímã MagSafe forte e caixa oficial inclusa, para diversos modelos de iPhone.",
+    image: "/products/carteira-magnetica-gerle-textura-preta.webp",
+    span: "lg:col-span-3",
   },
-  microfones: {
+  {
+    id: "microfones",
     title: "Microfones de Lapela",
     description:
       "Opções sem fio, ideais para vlogs, entrevistas, reuniões e criação de conteúdo.",
+    image: "/products/microfone-lapela-duplo-typec.webp",
+    span: "lg:col-span-3",
   },
-  iluminacao: {
+  {
+    id: "iluminacao",
     title: "Ring Lights Magnéticos",
     description:
       "Luz de preenchimento com encaixe MagSafe, espelho embutido e design dobrável para selfies e vídeos.",
+    image: "/products/ring-light-magnetico.webp",
+    span: "lg:col-span-2",
   },
-  gloss: {
+  {
+    id: "gloss",
     title: "Brilho Labial",
     description:
       "Efeito espelho 3D, fórmula à prova de água e textura não pegajosa. Kit com as cores disponíveis.",
+    image: "/products/brilho-labial-3d-kiko-rosa.webp",
+    span: "lg:col-span-2",
   },
-  tripes: {
+  {
+    id: "tripes",
     title: "Tripés e Suportes",
     description:
       "Tripé e vara de selfie com luz de preenchimento e comando Bluetooth remoto — 3 em 1 para criar conteúdo.",
+    image: "/products/tripe-selfie-stick-em-uso.webp",
+    span: "lg:col-span-2",
   },
-};
+];
 
-export default function Home() {
+export default async function Home() {
+  const products = await getAllProducts();
+
   const featuredByCategory = (
     ["carteiras", "microfones", "iluminacao", "gloss", "tripes"] as Product["category"][]
   )
@@ -52,131 +72,69 @@ export default function Home() {
 
   const destaques = extra ? [...featuredByCategory, extra] : featuredByCategory;
 
-  const carteiraDestaque = products.find(
-    (p) => p.slug === "carteira-magnetica-gerle-textura-preta"
-  );
-  const ringLightDestaque = products.find(
-    (p) => p.slug === "ring-light-magnetico-3-em-1"
-  );
-  const glossDestaque = products.find(
-    (p) => p.slug === "brilho-labial-3d-kiko"
+  const cardProduct = products.find(
+    (p) => p.slug === "carteira-magnetica-gerle-cinza"
   );
 
   return (
     <div className="flex flex-col gap-20">
-      <section className="grid items-center gap-10 sm:grid-cols-2">
-        <div className="animate-fade-up flex flex-col gap-6">
-          <span className="w-fit rounded-full border border-[var(--accent)]/40 bg-[var(--accent-soft)] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-dark)]">
-            Nova coleção
-          </span>
-          <h1 className="font-serif text-4xl leading-[1.1] text-[var(--foreground)] sm:text-5xl">
-            Detalhes que fazem a diferença no seu dia a dia
-          </h1>
-          <p className="max-w-md text-[15px] leading-relaxed text-[var(--muted)]">
-            Carteiras magnéticas com acabamento premium para o seu iPhone,
-            microfones de lapela, ring lights magnéticos e kits de tripé para
-            quem cria conteúdo. Qualidade que se sente ao toque.
-          </p>
-          <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <Link
-              href="/produtos"
-              className="rounded-full bg-[var(--foreground)] px-6 py-3 text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)]"
-            >
-              Ver Coleção
-            </Link>
-            <Link
-              href="/produtos?categoria=carteiras"
-              className="link-underline text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)]"
-            >
-              Carteiras →
-            </Link>
-            <Link
-              href="/produtos?categoria=microfones"
-              className="link-underline text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)]"
-            >
-              Microfones →
-            </Link>
-            <Link
-              href="/produtos?categoria=iluminacao"
-              className="link-underline text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)]"
-            >
-              Ring Lights →
-            </Link>
-            <Link
-              href="/produtos?categoria=gloss"
-              className="link-underline text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)]"
-            >
-              Brilho Labial →
-            </Link>
-            <Link
-              href="/produtos?categoria=tripes"
-              className="link-underline text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)]"
-            >
-              Tripés →
-            </Link>
-          </div>
-        </div>
+      <section className="flex flex-col gap-6">
+        <div className="animate-fade-up relative isolate overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-25px_rgba(28,26,23,0.35)]">
+          <div className="relative h-[440px] w-full sm:h-[540px]">
+            <Image
+              src="/hero/carteira-hero-banner.webp"
+              alt="Carteira magnética Kulanda em destaque"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
 
-        <div className="relative grid grid-cols-2 gap-4">
-          <div
-            className="pointer-events-none absolute -inset-6 -z-10 rounded-full opacity-60 blur-3xl"
-            style={{
-              background:
-                "radial-gradient(circle, var(--accent-soft) 0%, transparent 70%)",
-            }}
-          />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
 
-          {carteiraDestaque && (
-            <Link
-              href={`/produtos/${carteiraDestaque.slug}`}
-              className="group relative block"
+            <span className="absolute left-6 top-6 w-fit rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur sm:left-8 sm:top-8">
+              Nova coleção
+            </span>
+
+            <h1
+              className="pointer-events-none absolute inset-x-0 top-[40%] -translate-y-1/2 select-none whitespace-nowrap text-center font-sans text-[19vw] font-extrabold uppercase leading-none tracking-tight text-white sm:text-[8.5vw]"
+              style={{ mixBlendMode: "overlay" }}
             >
-              <ProductImage
-                color={carteiraDestaque.color}
-                emoji={carteiraDestaque.emoji}
-                image={carteiraDestaque.image}
-                alt={carteiraDestaque.name}
-                priority
-                className="h-64 rounded-sm shadow-[0_25px_50px_-20px_rgba(28,26,23,0.35)] transition-transform duration-500 group-hover:-translate-y-1 sm:h-[21.5rem]"
-              />
-              <span className="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-medium text-[var(--foreground)] shadow-sm backdrop-blur">
-                {getCategoryLabel(carteiraDestaque.category)} · {formatPrice(carteiraDestaque.price)}
-              </span>
-            </Link>
-          )}
+              Estilo Sem Limites
+            </h1>
 
-          <div className="mt-8 flex flex-col gap-4">
-            {ringLightDestaque && (
+            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 sm:max-w-xs sm:p-10">
+              <p className="text-[15px] leading-relaxed text-white/90">
+                Carteiras magnéticas com acabamento premium, ímã MagSafe
+                forte e design que acompanha o seu ritmo.
+              </p>
               <Link
-                href={`/produtos/${ringLightDestaque.slug}`}
-                className="group relative block"
+                href="/produtos"
+                className="btn-lift w-fit rounded-full bg-white px-6 py-3 text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)] transition-colors hover:bg-[var(--accent-soft)]"
               >
-                <ProductImage
-                  color={ringLightDestaque.color}
-                  emoji={ringLightDestaque.emoji}
-                  image={ringLightDestaque.image}
-                  alt={ringLightDestaque.name}
-                  className="h-32 rounded-sm shadow-[0_20px_40px_-20px_rgba(28,26,23,0.3)] transition-transform duration-500 group-hover:-translate-y-1 sm:h-40"
-                />
-                <span className="absolute bottom-2 left-2 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-medium text-[var(--foreground)] shadow-sm backdrop-blur">
-                  {getCategoryLabel(ringLightDestaque.category)}
-                </span>
+                Ver Coleção
               </Link>
-            )}
-            {glossDestaque && (
+            </div>
+
+            {cardProduct && (
               <Link
-                href={`/produtos/${glossDestaque.slug}`}
-                className="group relative block"
+                href={`/produtos/${cardProduct.slug}`}
+                className="group absolute bottom-6 right-6 hidden w-56 items-center gap-3 rounded-2xl bg-white p-3 shadow-[0_20px_40px_-15px_rgba(28,26,23,0.4)] transition-transform duration-300 hover:-translate-y-1 sm:flex"
               >
-                <ProductImage
-                  color={glossDestaque.color}
-                  emoji={glossDestaque.emoji}
-                  image={glossDestaque.image}
-                  alt={glossDestaque.name}
-                  className="h-32 rounded-sm shadow-[0_20px_40px_-20px_rgba(28,26,23,0.3)] transition-transform duration-500 group-hover:-translate-y-1 sm:h-40"
-                />
-                <span className="absolute bottom-2 left-2 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-medium text-[var(--foreground)] shadow-sm backdrop-blur">
-                  {getCategoryLabel(glossDestaque.category)}
+                <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[var(--surface)]">
+                  <Image
+                    src="/hero/carteira-hero-banner.webp"
+                    alt={cardProduct.name}
+                    fill
+                    sizes="56px"
+                    className="object-cover object-center"
+                  />
+                </span>
+                <span className="flex items-center gap-1.5 text-[13px] font-medium leading-snug text-[var(--foreground)]">
+                  Ver Detalhes do Produto
+                  <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
                 </span>
               </Link>
             )}
@@ -203,38 +161,99 @@ export default function Home() {
             Ver todos →
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
-          {destaques.map((product) => (
-            <ProductCard key={product.slug} product={product} />
+        <div className="flex flex-wrap items-center gap-2.5">
+          <Link
+            href="/produtos"
+            className="rounded-full bg-[var(--foreground)] px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-[var(--accent-dark)]"
+          >
+            Todas
+          </Link>
+          <Link
+            href="/produtos?categoria=carteiras"
+            className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
+          >
+            Carteiras
+          </Link>
+          <Link
+            href="/produtos?categoria=microfones"
+            className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
+          >
+            Microfones
+          </Link>
+          <Link
+            href="/produtos?categoria=iluminacao"
+            className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
+          >
+            Ring Lights
+          </Link>
+          <Link
+            href="/produtos?categoria=gloss"
+            className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
+          >
+            Brilho Labial
+          </Link>
+          <Link
+            href="/produtos?categoria=tripes"
+            className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
+          >
+            Tripés
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
+          {destaques.map((product, index) => (
+            <ProductCard key={product.slug} product={product} index={index} />
           ))}
         </div>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {(Object.keys(categoryContent) as Product["category"][]).map(
-          (category) => (
+      <section className="flex flex-col gap-8">
+        <div>
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
+            Explorar
+          </p>
+          <h2 className="mt-1 font-serif text-2xl text-[var(--foreground)]">
+            Categorias
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
+          {categoryTiles.map((category, index) => (
             <Link
-              key={category}
-              href={`/produtos?categoria=${category}`}
-              className="group flex flex-col justify-between overflow-hidden rounded-sm border border-[var(--border)] bg-[var(--surface)] p-8 transition-shadow hover:shadow-[0_20px_40px_-15px_rgba(28,26,23,0.18)]"
+              key={category.id}
+              href={`/produtos?categoria=${category.id}`}
+              className={`animate-fade-up group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_25px_50px_-20px_rgba(28,26,23,0.25)] ${category.span}`}
+              style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div>
-                <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-                  Categoria
-                </p>
-                <h3 className="mt-2 font-serif text-2xl text-[var(--foreground)]">
-                  {categoryContent[category].title}
-                </h3>
-                <p className="mt-2 max-w-sm text-sm text-[var(--muted)]">
-                  {categoryContent[category].description}
-                </p>
+              <div className="relative h-48 w-full overflow-hidden sm:h-56">
+                <Image
+                  src={category.image}
+                  alt={category.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-transparent" />
               </div>
-              <span className="link-underline mt-6 w-fit text-sm font-medium text-[var(--foreground)]">
-                Explorar coleção →
-              </span>
+              <div className="flex flex-1 flex-col justify-between gap-4 p-6">
+                <div>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
+                    Categoria
+                  </p>
+                  <h3 className="mt-1 font-serif text-xl text-[var(--foreground)] transition-colors group-hover:text-[var(--accent-dark)]">
+                    {category.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-[var(--muted)]">
+                    {category.description}
+                  </p>
+                </div>
+                <span className="link-underline flex w-fit items-center gap-1 text-sm font-medium text-[var(--foreground)]">
+                  Explorar coleção
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </span>
+              </div>
             </Link>
-          )
-        )}
+          ))}
+        </div>
       </section>
     </div>
   );

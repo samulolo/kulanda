@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Minus, Plus, Check } from "lucide-react";
-import { Product } from "@/lib/products";
+import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
+
+const MAX_QUANTITY = 20;
 
 export default function AddToCartControls({ product }: { product: Product }) {
   const { addItem } = useCart();
@@ -43,7 +45,7 @@ export default function AddToCartControls({ product }: { product: Product }) {
           <button
             type="button"
             onClick={() =>
-              setQuantity((q) => Math.min(product.stock, q + 1))
+              setQuantity((q) => Math.min(MAX_QUANTITY, q + 1))
             }
             className="flex items-center justify-center px-4 py-2.5 text-[var(--foreground)] transition-colors hover:text-[var(--accent)]"
             aria-label="Aumentar quantidade"
@@ -51,17 +53,22 @@ export default function AddToCartControls({ product }: { product: Product }) {
             <Plus className="h-4 w-4" />
           </button>
         </div>
-        <span className="text-sm text-[var(--muted)]">
-          {product.stock} em estoque
-          {minQuantity > 1 && ` · mínimo de ${minQuantity} unidades`}
-        </span>
+        {minQuantity > 1 && (
+          <span className="text-sm text-[var(--muted)]">
+            Mínimo de {minQuantity} unidades
+          </span>
+        )}
       </div>
 
       <div className="flex gap-3">
         <button
           type="button"
           onClick={handleAdd}
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-[var(--foreground)] px-5 py-3.5 text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)] transition-colors hover:bg-[var(--foreground)] hover:text-white"
+          className={`btn-lift flex flex-1 items-center justify-center gap-1.5 rounded-full border px-5 py-3.5 text-[13px] font-medium uppercase tracking-wide transition-colors ${
+            added
+              ? "border-[var(--accent)] bg-[var(--accent)] text-white"
+              : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-white"
+          }`}
         >
           {added && <Check className="h-3.5 w-3.5" />}
           {added ? "Adicionado" : "Adicionar ao carrinho"}
@@ -69,7 +76,7 @@ export default function AddToCartControls({ product }: { product: Product }) {
         <button
           type="button"
           onClick={handleBuyNow}
-          className="flex-1 rounded-full bg-[var(--foreground)] px-5 py-3.5 text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)]"
+          className="btn-lift flex-1 rounded-full bg-[var(--foreground)] px-5 py-3.5 text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)]"
         >
           Comprar agora
         </button>

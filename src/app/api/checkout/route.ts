@@ -43,17 +43,22 @@ export async function POST(req: NextRequest) {
 
   // Nunca confiar em preços vindos do cliente — recalcula tudo a partir do catálogo.
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+  // Guardamos slug + quantidade (validados) para o webhook conseguir
+  // reconstruir a encomenda sem ter de voltar a confiar no cliente.
+  const itemTokens: string[] = [];
   let subtotalCents = 0;
   const origin = new URL(req.url).origin;
 
+  const MAX_QUANTITY = 20;
+
   for (const raw of itemsInput) {
-    const produto = getProductBySlug(raw?.slug ?? "");
+    const produto = await getProductBySlug(raw?.slug ?? "");
     if (!produto) continue;
 
     const minimo = produto.minQuantity ?? 1;
     const quantidade = Math.max(
       minimo,
-      Math.min(Math.floor(raw.quantity || minimo), produto.stock)
+      Math.min(Math.floor(raw.quantity || minimo), MAX_QUANTITY)
     );
     const unitAmount = Math.round(produto.price * 100);
     subtotalCents += unitAmount * quantidade;
@@ -69,6 +74,7 @@ export async function POST(req: NextRequest) {
       },
       quantity: quantidade,
     });
+    itemTokens.push(`${produto.slug}:${quantidade}`);
   }
 
   if (line_items.length === 0) {
@@ -101,6 +107,16 @@ export async function POST(req: NextRequest) {
     discounts = [{ coupon: coupon.id }];
   }
 
+  // Metadata da Stripe tem limite de 500 caracteres por valor — partimos a
+  // lista de itens em vários campos (items_0, items_1, ...) só por segurança.
+  const itemsJoined = itemTokens.join("|");
+  const CHUNK_SIZE = 450;
+  const metadata: Record<string, string> = {};
+  for (let i = 0, idx = 0; i < itemsJoined.length; i += CHUNK_SIZE, idx++) {
+    metadata[`items_${idx}`] = itemsJoined.slice(i, i + CHUNK_SIZE);
+  }
+  if (codigoCupom) metadata.cupom = codigoCupom;
+
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -113,6 +129,7 @@ export async function POST(req: NextRequest) {
       customer_email: body.email || undefined,
       shipping_address_collection: { allowed_countries: ["PT", "ES"] },
       locale: "pt",
+      metadata,
       success_url: `${origin}/checkout/sucesso?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout`,
     });

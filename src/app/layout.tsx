@@ -8,8 +8,11 @@ import "@fontsource/manrope/600.css";
 import "@fontsource/manrope/700.css";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
+import { FavoritesProvider } from "@/lib/favorites-context";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FavoritesDrawer from "@/components/FavoritesDrawer";
+import { getCategories } from "@/lib/products";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -59,7 +62,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const categories = await getCategories();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -77,11 +82,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <CartProvider>
-          <Header />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10 sm:px-8">
-            {children}
-          </main>
-          <Footer />
+          <FavoritesProvider>
+            <Header categories={categories} />
+            <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10 sm:px-8">
+              {children}
+            </main>
+            <Footer />
+            <FavoritesDrawer />
+          </FavoritesProvider>
         </CartProvider>
       </body>
     </html>

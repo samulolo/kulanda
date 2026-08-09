@@ -16,15 +16,15 @@ const passos = [
     Icon: ShieldCheck,
   },
   {
-    title: "Troca ou devolução em 7 dias",
+    title: "Troca ou devolução em 14 dias",
     description:
-      "Se mudar de ideias, tem até 7 dias após a receção para pedir troca ou devolução, desde que o produto esteja por usar e na embalagem original.",
+      "Ao abrigo do direito de livre resolução, tem até 14 dias após a receção para pedir troca ou devolução, sem necessidade de indicar motivo, desde que o produto esteja por usar e na embalagem original.",
     Icon: RefreshCw,
   },
   {
     title: "Como pedir",
     description:
-      "Envie um e-mail para geral@kulanda.pt com o número da encomenda e o motivo da troca ou devolução. Indicamos os passos seguintes.",
+      "Envie um e-mail para geral@kulanda-store.com com o número da encomenda e o motivo da troca ou devolução. Indicamos os passos seguintes.",
     Icon: PackageCheck,
   },
 ];

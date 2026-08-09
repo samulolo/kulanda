@@ -1,6 +1,6 @@
 // URL definitiva da loja. Troque aqui quando o domínio real for comprado —
 // esse valor alimenta o sitemap, o robots.txt, as tags canonical e o Open Graph.
-export const SITE_URL = "https://kulanda.pt";
+export const SITE_URL = "https://kulanda-store.com";
 
 export const SITE_NAME = "Kulanda";
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ShoppingBag, Minus, Plus, X } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { formatPrice } from "@/lib/products";
+import { formatPrice } from "@/lib/format";
 import ProductImage from "@/components/ProductImage";
 
 export default function CarrinhoPage() {
@@ -121,7 +121,7 @@ export default function CarrinhoPage() {
           </div>
           <Link
             href="/checkout"
-            className="mt-2 rounded-full bg-[var(--foreground)] px-5 py-3.5 text-center text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)]"
+            className="btn-lift mt-2 rounded-full bg-[var(--foreground)] px-5 py-3.5 text-center text-[13px] font-medium uppercase tracking-wide text-white transition-colors hover:bg-[var(--accent-dark)]"
           >
             Finalizar compra
           </Link>

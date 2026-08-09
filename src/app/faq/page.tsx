@@ -1,0 +1,63 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Perguntas Frequentes",
+  description:
+    "Respostas às dúvidas mais comuns sobre entrega, garantia, devoluções e pagamento na Kulanda.",
+  alternates: { canonical: "/faq" },
+};
+
+const faqs = [
+  {
+    q: "Quais os prazos de entrega?",
+    a: "Os prazos de entrega são apresentados no checkout antes da confirmação da encomenda, de acordo com a morada indicada. Encomendas acima de €50 têm frete grátis.",
+  },
+  {
+    q: "Como funciona a garantia de 30 dias?",
+    a: "Todos os produtos têm 30 dias de garantia a contar da data de receção. Se o artigo apresentar defeito de fabrico, substituímos ou reembolsamos.",
+  },
+  {
+    q: "Posso trocar ou devolver um produto?",
+    a: "Sim. Tem até 7 dias após a receção para pedir troca ou devolução, desde que o produto esteja em bom estado e na embalagem original. Consulte a nossa política de devoluções para o processo completo.",
+  },
+  {
+    q: "Que métodos de pagamento são aceites?",
+    a: "Visa, Mastercard, MB WAY, PayPal e Apple Pay.",
+  },
+  {
+    q: "As carteiras magnéticas funcionam com qualquer iPhone?",
+    a: "As carteiras magnéticas foram desenhadas para o encaixe MagSafe. Consulte a ficha de cada produto para ver os modelos de iPhone compatíveis.",
+  },
+  {
+    q: "O microfone de lapela precisa de aplicação própria?",
+    a: "Não. É plug and play: basta ligar ao conector Type-C do dispositivo e está pronto a usar.",
+  },
+  {
+    q: "Como faço para acompanhar a minha encomenda?",
+    a: "Após a confirmação da encomenda, enviamos as atualizações de estado para o e-mail indicado no checkout.",
+  },
+];
+
+export default function FaqPage() {
+  return (
+    <div className="flex flex-col gap-10">
+      <div className="max-w-2xl">
+        <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
+          Ajuda
+        </p>
+        <h1 className="mt-1 font-serif text-3xl text-[var(--foreground)] sm:text-4xl">
+          Perguntas Frequentes
+        </h1>
+      </div>
+
+      <div className="flex max-w-3xl flex-col divide-y divide-[var(--border)] border-y border-[var(--border)]">
+        {faqs.map(({ q, a }) => (
+          <div key={q} className="flex flex-col gap-2 py-6">
+            <h2 className="font-serif text-lg text-[var(--foreground)]">{q}</h2>
+            <p className="text-sm leading-relaxed text-[var(--muted)]">{a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

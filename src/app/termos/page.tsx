@@ -54,7 +54,7 @@ export default function TermosPage() {
             Entrega
           </h2>
           <p>
-            As entregas demoram, em média, entre 8 a 20 dias, dependendo da
+            As entregas demoram, em média, entre 10 a 15 dias, dependendo da
             morada de destino. O envio é grátis em todas as encomendas.
           </p>
           <p className="mt-2">

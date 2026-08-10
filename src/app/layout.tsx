@@ -9,9 +9,12 @@ import "@fontsource/manrope/700.css";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import { FavoritesProvider } from "@/lib/favorites-context";
+import { ConsentProvider } from "@/lib/consent-context";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FavoritesDrawer from "@/components/FavoritesDrawer";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
+import AnalyticsLoader from "@/components/AnalyticsLoader";
 import { getCategories } from "@/lib/products";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
@@ -81,16 +84,20 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <CartProvider>
-          <FavoritesProvider>
-            <Header categories={categories} />
-            <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10 sm:px-8">
-              {children}
-            </main>
-            <Footer />
-            <FavoritesDrawer />
-          </FavoritesProvider>
-        </CartProvider>
+        <ConsentProvider>
+          <CartProvider>
+            <FavoritesProvider>
+              <Header categories={categories} />
+              <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-10 sm:px-8">
+                {children}
+              </main>
+              <Footer />
+              <FavoritesDrawer />
+            </FavoritesProvider>
+          </CartProvider>
+          <CookieConsentBanner />
+          <AnalyticsLoader gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        </ConsentProvider>
       </body>
     </html>
   );

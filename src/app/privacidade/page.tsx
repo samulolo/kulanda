@@ -73,9 +73,17 @@ export default function PrivacidadePage() {
             Cookies
           </h2>
           <p>
-            Este site utiliza apenas cookies essenciais ao funcionamento da
-            loja, como os necessários para manter o carrinho de compras
-            durante a sua visita.
+            Usamos cookies essenciais ao funcionamento da loja (como os
+            necessários para manter o carrinho de compras durante a sua
+            visita), que não requerem autorização por serem indispensáveis.
+          </p>
+          <p className="mt-2">
+            Usamos também, apenas com o seu consentimento prévio, cookies de
+            análise (Google Analytics) para percebermos como o site é usado e
+            melhorá-lo. Pode aceitar ou recusar estes cookies no banner
+            apresentado na primeira visita, e alterar a sua escolha a
+            qualquer momento através do link "Preferências de cookies" no
+            rodapé do site.
           </p>
         </div>
       </div>

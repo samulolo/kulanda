@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
 import { getCategories } from "@/lib/products";
 import { PaymentMethods } from "./TrustSignals";
+import CookiePreferencesButton from "./CookiePreferencesButton";
 
 export default async function Footer() {
   const categories = await getCategories();
@@ -84,6 +85,9 @@ export default async function Footer() {
                 </Link>
               </li>
               <li>Pagamentos processados com segurança pela Stripe</li>
+              <li>
+                <CookiePreferencesButton />
+              </li>
             </ul>
           </div>
         </div>

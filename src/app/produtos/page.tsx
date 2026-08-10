@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import ProductCard from "@/components/ProductCard";
+import Link from "next/link";
+import ProductsCatalog from "@/components/ProductsCatalog";
 import { getCategories, getProductsByCategory, getCategoryLabel, type Category } from "@/lib/products";
 import { SITE_NAME } from "@/lib/site";
 
@@ -57,17 +58,35 @@ export default async function ProdutosPage({
         <h1 className="mt-1 font-serif text-3xl text-[var(--foreground)]">
           {tituloCategoria}
         </h1>
-        <p className="mt-2 text-sm text-[var(--muted)]">
-          {produtos.length} produto{produtos.length !== 1 ? "s" : ""}{" "}
-          encontrado{produtos.length !== 1 ? "s" : ""}
-        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Link
+            href="/produtos"
+            className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors ${
+              !categoriaValida
+                ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
+                : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
+            }`}
+          >
+            Todos
+          </Link>
+          {categories.map((c) => (
+            <Link
+              key={c.id}
+              href={`/produtos?categoria=${c.id}`}
+              className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors ${
+                categoriaValida === c.id
+                  ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
+                  : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
+              }`}
+            >
+              {c.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
-        {produtos.map((product, index) => (
-          <ProductCard key={product.slug} product={product} index={index} />
-        ))}
-      </div>
+      <ProductsCatalog products={produtos} />
     </div>
   );
 }

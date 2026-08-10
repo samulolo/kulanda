@@ -13,6 +13,10 @@ const faqs = [
     a: "Os prazos de entrega são apresentados no checkout antes da confirmação da encomenda, de acordo com a morada indicada. O envio é grátis em todas as encomendas.",
   },
   {
+    q: "Posso ter de pagar taxas alfandegárias?",
+    a: "Em casos raros, encomendas internacionais podem estar sujeitas a taxas alfandegárias adicionais, da responsabilidade do cliente. Isto acontece em menos de 5% das entregas.",
+  },
+  {
     q: "Como funciona a garantia de 30 dias?",
     a: "Todos os produtos têm 30 dias de garantia a contar da data de receção. Se o artigo apresentar defeito de fabrico, substituímos ou reembolsamos.",
   },
@@ -22,7 +26,7 @@ const faqs = [
   },
   {
     q: "Que métodos de pagamento são aceites?",
-    a: "Visa, Mastercard, MB WAY, PayPal e Apple Pay.",
+    a: "Cartão (Visa e Mastercard), Apple Pay e MB WAY.",
   },
   {
     q: "As carteiras magnéticas funcionam com qualquer iPhone?",

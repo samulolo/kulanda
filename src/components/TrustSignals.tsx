@@ -1,6 +1,6 @@
 import { Lock, ShieldCheck, BadgeCheck } from "lucide-react";
 
-const paymentMethods = ["Visa", "Mastercard", "MB WAY", "PayPal", "Apple Pay"];
+const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "MB WAY"];
 
 /** Fila de métodos de pagamento aceites, usada no footer e no checkout. */
 export function PaymentMethods({

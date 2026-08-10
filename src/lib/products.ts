@@ -104,7 +104,13 @@ function mapFlatProduct(
     price: Number(raw.price),
     compareAtPrice:
       raw.compare_at_price != null ? Number(raw.compare_at_price) : undefined,
-    description: raw.description,
+    // Cada variante de cor herda a mesma descrição do produto "pai" (a
+    // tabela detalhes_produto não tem campo de descrição próprio) —
+    // acrescentamos a cor no fim para as páginas de cada variante não
+    // ficarem com meta description duplicada entre si.
+    description: variant?.cor_label
+      ? `${raw.description} Disponível na cor ${variant.cor_label}.`
+      : raw.description,
     features: raw.features ?? [],
     color: variant?.cor ?? defaults.color,
     emoji: defaults.emoji,

@@ -57,6 +57,11 @@ export default function TermosPage() {
             Os prazos de entrega são apresentados antes da finalização da
             compra. O envio é grátis em todas as encomendas.
           </p>
+          <p className="mt-2">
+            Em casos raros, encomendas internacionais podem estar sujeitas a
+            taxas alfandegárias adicionais, da responsabilidade do cliente.
+            Isto acontece em menos de 5% das entregas.
+          </p>
         </div>
 
         <div>

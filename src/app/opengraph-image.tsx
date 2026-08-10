@@ -40,7 +40,7 @@ export default function OpengraphImage() {
             textTransform: "uppercase",
           }}
         >
-          Carteiras · Microfones · Ring Lights · Brilho Labial
+          Carteiras · Microfones · Ring Lights · Tripés
         </div>
       </div>
     ),

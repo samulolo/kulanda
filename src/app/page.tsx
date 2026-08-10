@@ -15,7 +15,7 @@ const categoryTiles: {
     id: "carteiras",
     title: "Carteiras Magnéticas",
     description:
-      "Material Finewoven, ímã MagSafe forte e caixa oficial inclusa, para diversos modelos de iPhone.",
+      "Ímã forte compatível com MagSafe, para diversos modelos de iPhone.",
     image: "/products/carteira-magnetica-gerle-textura-preta.webp",
     span: "lg:col-span-3",
   },
@@ -33,15 +33,7 @@ const categoryTiles: {
     description:
       "Luz de preenchimento com encaixe MagSafe, espelho embutido e design dobrável para selfies e vídeos.",
     image: "/products/ring-light-magnetico.webp",
-    span: "lg:col-span-2",
-  },
-  {
-    id: "gloss",
-    title: "Brilho Labial",
-    description:
-      "Efeito espelho 3D, fórmula à prova de água e textura não pegajosa. Kit com as cores disponíveis.",
-    image: "/products/brilho-labial-3d-kiko-rosa.webp",
-    span: "lg:col-span-2",
+    span: "lg:col-span-3",
   },
   {
     id: "tripes",
@@ -49,7 +41,7 @@ const categoryTiles: {
     description:
       "Tripé e vara de selfie com luz de preenchimento e comando Bluetooth remoto — 3 em 1 para criar conteúdo.",
     image: "/products/tripe-selfie-stick-em-uso.webp",
-    span: "lg:col-span-2",
+    span: "lg:col-span-3",
   },
 ];
 
@@ -57,7 +49,7 @@ export default async function Home() {
   const products = await getAllProducts();
 
   const featuredByCategory = (
-    ["carteiras", "microfones", "iluminacao", "gloss", "tripes"] as Product["category"][]
+    ["carteiras", "microfones", "iluminacao", "tripes"] as Product["category"][]
   )
     .map(
       (category) =>
@@ -185,12 +177,6 @@ export default async function Home() {
             className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
           >
             Ring Lights
-          </Link>
-          <Link
-            href="/produtos?categoria=gloss"
-            className="rounded-full border border-[var(--border)] px-4 py-2 text-[13px] font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-dark)]"
-          >
-            Brilho Labial
           </Link>
           <Link
             href="/produtos?categoria=tripes"

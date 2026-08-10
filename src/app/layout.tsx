@@ -21,7 +21,7 @@ import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Carteiras Magnéticas, Microfones, Ring Lights e Brilho Labial`,
+    default: `${SITE_NAME} — Carteiras Magnéticas, Microfones e Ring Lights`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -46,12 +46,12 @@ export const metadata: Metadata = {
     locale: "pt_PT",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Carteiras Magnéticas, Microfones, Ring Lights e Brilho Labial`,
+    title: `${SITE_NAME} — Carteiras Magnéticas, Microfones e Ring Lights`,
     description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Carteiras Magnéticas, Microfones, Ring Lights e Brilho Labial`,
+    title: `${SITE_NAME} — Carteiras Magnéticas, Microfones e Ring Lights`,
     description: SITE_DESCRIPTION,
   },
   robots: {

@@ -35,7 +35,6 @@ const CATEGORY_DEFAULTS: Record<string, { emoji: string; color: string }> = {
   carteiras: { emoji: "👛", color: "#8a5a34" },
   microfones: { emoji: "🎙️", color: "#1f2937" },
   iluminacao: { emoji: "💡", color: "#1c1c1c" },
-  gloss: { emoji: "💄", color: "#e8a9c2" },
   tripes: { emoji: "🎥", color: "#1c1c1c" },
 };
 const FALLBACK_DEFAULTS = { emoji: "📦", color: "#1c1c1c" };

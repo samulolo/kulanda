@@ -183,6 +183,7 @@ export const getCategories = cache(async function getCategories(): Promise<
   }));
 });
 
+
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
   const products = await getAllProducts();
   return products.find((p) => p.slug === slug);

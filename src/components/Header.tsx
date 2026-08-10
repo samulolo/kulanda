@@ -56,7 +56,7 @@ export default function Header({ categories }: HeaderProps) {
   return (
     <>
       <div className="bg-[var(--foreground)] py-2 text-center text-[11px] uppercase tracking-[0.18em] text-white/70">
-        Envio grátis em todas as encomendas · Garantia de 30 dias
+        Envio grátis em todas as encomendas · Entrega estimada em 10 a 15 dias · Garantia de 30 dias
       </div>
       <header className="sticky top-0 z-20 border-b border-[var(--border)] bg-[var(--background)]/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, BookOpen } from "lucide-react";
 import { getCategories } from "@/lib/products";
 import { PaymentMethods } from "./TrustSignals";
 import CookiePreferencesButton from "./CookiePreferencesButton";
@@ -74,6 +74,17 @@ export default async function Footer() {
               Legal
             </p>
             <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="https://www.livroreclamacoes.pt/Inicio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline inline-flex items-center gap-1.5 font-medium text-[var(--accent)] hover:text-[var(--accent)]"
+                >
+                  <BookOpen strokeWidth={1.6} className="h-4 w-4" />
+                  Livro de Reclamações Eletrónico
+                </a>
+              </li>
               <li>
                 <Link href="/privacidade" className="link-underline hover:text-white">
                   Política de Privacidade

@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     "capa magsafe carteira",
     "microfone de lapela sem fio",
     "ring light magnético",
-    "brilho labial 3d",
     "tripé selfie stick com luz",
     "acessórios iphone premium",
-    "kulanda",
+    "kulanda-store",
+    "kulanda"
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,

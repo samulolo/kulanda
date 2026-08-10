@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Quais os prazos de entrega?",
-    a: "Os prazos de entrega são apresentados no checkout antes da confirmação da encomenda, de acordo com a morada indicada. O envio é grátis em todas as encomendas.",
+    a: "As entregas demoram, em média, entre 8 a 20 dias, dependendo da morada de destino. O envio é grátis em todas as encomendas.",
   },
   {
     q: "Posso ter de pagar taxas alfandegárias?",

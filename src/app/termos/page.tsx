@@ -54,8 +54,8 @@ export default function TermosPage() {
             Entrega
           </h2>
           <p>
-            Os prazos de entrega são apresentados antes da finalização da
-            compra. O envio é grátis em todas as encomendas.
+            As entregas demoram, em média, entre 8 a 20 dias, dependendo da
+            morada de destino. O envio é grátis em todas as encomendas.
           </p>
           <p className="mt-2">
             Em casos raros, encomendas internacionais podem estar sujeitas a

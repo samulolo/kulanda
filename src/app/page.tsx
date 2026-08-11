@@ -71,7 +71,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-20">
       <section className="flex flex-col gap-6">
-        <div className="animate-fade-up relative isolate overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-25px_rgba(28,26,23,0.35)]">
+        <div className="animate-fade-up relative isolate overflow-hidden rounded-[2rem] shadow-[0_40px_80px_-20px_rgba(28,26,23,0.4)]">
           <div className="relative h-[440px] w-full sm:h-[540px]">
             <Image
               src="/hero/carteira-hero-banner.webp"

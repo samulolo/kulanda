@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -9,6 +10,9 @@
   --accent: #a9824c;
   --accent-dark: #8a6a3c;
   --accent-soft: #f1e6d2;
+  --accent-premium: #A16207;
+  --font-luxury: "Bodoni Moda", ui-serif, Georgia, serif;
+  --font-body-premium: "Jost", ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {

@@ -71,68 +71,92 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-20">
       <section className="flex flex-col gap-6">
-        <div className="animate-fade-up relative isolate overflow-hidden rounded-[2rem] shadow-[0_30px_60px_-25px_rgba(28,26,23,0.35)]">
-          <div className="relative h-[440px] w-full sm:h-[540px]">
-            <Image
-              src="/hero/carteira-hero-banner.webp"
-              alt="Carteira magnética Kulanda em destaque"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center"
-            />
+        <div className="animate-fade-up relative isolate overflow-hidden rounded-3xl shadow-[0_30px_60px_-25px_rgba(28,26,23,0.35)]">
+          <div className="relative h-[500px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.3fr] gap-0 overflow-hidden">
+            {/* Left Content Area */}
+            <div className="relative flex flex-col justify-between bg-[var(--background)] p-6 sm:p-10 lg:p-12 z-10">
+              {/* Trust Badge */}
+              <div className="animate-text-reveal flex items-center gap-2 w-fit mb-8">
+                <span className="text-lg">⭐</span>
+                <span className="text-xs font-medium text-[var(--muted)] uppercase tracking-widest">
+                  Escolha de 1200+ Criadores
+                </span>
+              </div>
 
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+              {/* Headline */}
+              <div className="flex-1 flex flex-col justify-center gap-6">
+                <h1
+                  className="animate-text-reveal font-[var(--font-luxury)] text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[var(--foreground)]"
+                  style={{ animationDelay: '0.1s' }}
+                >
+                  Estilo Sem Limites
+                </h1>
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent opacity-30" />
+                <p
+                  className="animate-text-reveal text-base sm:text-lg leading-relaxed text-[var(--muted)] max-w-sm"
+                  style={{ animationDelay: '0.2s' }}
+                >
+                  Acessórios premium para criadores e profissionais que não abrem mão de qualidade. Tecnologia MagSafe, design apurado, confiança garantida.
+                </p>
 
-            <span className="animate-text-reveal absolute left-6 top-6 w-fit rounded-full border border-white/40 bg-white/15 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur sm:left-8 sm:top-8">
-              Nova coleção
-            </span>
+                {/* CTA Button */}
+                <Link
+                  href="/produtos"
+                  className="animate-scale-in-up btn-lift w-fit px-8 py-4 rounded-lg bg-[var(--accent-premium)] text-white font-semibold text-base uppercase tracking-wide transition-all duration-300 hover:bg-[var(--accent-dark)] hover:shadow-[0_16px_32px_-8px_rgba(161,98,7,0.3)]"
+                  style={{ animationDelay: '0.3s' }}
+                >
+                  Ver Coleção
+                </Link>
+              </div>
 
-            <h1
-              className="pointer-events-none absolute inset-x-0 top-[40%] -translate-y-1/2 select-none whitespace-nowrap text-center font-sans text-[19vw] font-extrabold uppercase leading-none tracking-tight text-white sm:text-[8.5vw] animate-text-reveal"
-              style={{ mixBlendMode: "overlay" }}
-            >
-              Estilo Sem Limites
-            </h1>
-
-            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 sm:max-w-xs sm:p-10 animate-slide-in-right">
-              <p className="text-[15px] leading-relaxed text-white/95">
-                Carteiras magnéticas com acabamento premium, ímã MagSafe
-                forte e design que acompanha o seu ritmo.
-              </p>
-              <Link
-                href="/produtos"
-                className="btn-lift w-fit rounded-full bg-white px-6 py-3 text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)] transition-colors hover:bg-[var(--accent-soft)] hover:shadow-[0_12px_24px_-12px_rgba(28,26,23,0.35)]"
-              >
-                Ver Coleção
-              </Link>
+              {/* Accent Line */}
+              <div className="animate-accent-width h-1 w-16 bg-[var(--accent-premium)] rounded-full mt-8 opacity-0" style={{ animationDelay: '0.5s' }} />
             </div>
 
-            {cardProduct && (
-              <Link
-                href={`/produtos/${cardProduct.slug}`}
-                className="group card-lift absolute bottom-6 right-6 hidden w-56 items-center gap-3 rounded-2xl bg-white p-3 shadow-[0_20px_40px_-15px_rgba(28,26,23,0.4)] sm:flex animate-scale-in-up"
-                style={{ animationDelay: '0.4s' }}
-              >
-                <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[var(--surface)] ring-1 ring-[var(--border)]">
-                  <Image
-                    src="/hero/carteira-hero-banner.webp"
-                    alt={cardProduct.name}
-                    fill
-                    sizes="56px"
-                    className="object-cover object-center"
-                  />
-                </span>
-                <span className="flex items-center gap-1.5 text-[13px] font-medium leading-snug text-[var(--foreground)]">
-                  Ver Detalhes do Produto
-                  <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
-                    →
+            {/* Right Visual Area */}
+            <div className="relative hidden sm:block lg:flex items-center justify-center overflow-hidden bg-gradient-to-br from-[var(--accent-premium)]/20 via-[var(--accent-soft)] to-[var(--accent-premium)]/10">
+              <Image
+                src="/hero/carteira-hero-banner.webp"
+                alt="Carteira magnética premium em destaque"
+                fill
+                priority
+                sizes="(max-width: 640px) 0, (max-width: 1024px) 50vw, 65vw"
+                className="object-cover object-center scale-110 group-hover:scale-120 transition-transform duration-700"
+              />
+
+              {/* Gradient Overlay */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+              {/* Featured Product Card */}
+              {cardProduct && (
+                <Link
+                  href={`/produtos/${cardProduct.slug}`}
+                  className="group card-lift animate-scale-in-up absolute bottom-6 right-6 w-56 items-center gap-4 rounded-2xl bg-white p-4 shadow-[0_20px_40px_-15px_rgba(28,26,23,0.4)] flex"
+                  style={{ animationDelay: '0.4s' }}
+                >
+                  <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-[var(--surface)] ring-2 ring-[var(--accent-premium)]/30">
+                    <Image
+                      src="/hero/carteira-hero-banner.webp"
+                      alt={cardProduct.name}
+                      fill
+                      sizes="64px"
+                      className="object-cover object-center"
+                    />
                   </span>
-                </span>
-              </Link>
-            )}
+                  <div className="flex flex-col gap-1">
+                    <span className="text-sm font-bold text-[var(--foreground)]">
+                      {cardProduct.name}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs font-medium text-[var(--accent-premium)] group-hover:text-[var(--accent-dark)] transition-colors">
+                      Ver detalhes
+                      <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </span>
+                  </div>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -141,15 +165,15 @@ export default async function Home() {
 
       <section className="flex flex-col gap-8">
         <div className="flex items-end justify-between">
-          <div className="flex flex-col gap-1">
-            <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-              Seleção da casa
+          <div className="flex flex-col gap-2">
+            <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-premium)]">
+              Seleção da Casa
             </p>
-            <div className="flex items-center gap-3">
-              <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+            <div className="flex items-center gap-4">
+              <h2 className="animate-text-reveal font-[var(--font-luxury)] text-4xl sm:text-5xl font-bold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
                 Destaques
               </h2>
-              <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
+              <div className="animate-accent-width h-1.5 w-16 bg-[var(--accent-premium)] rounded-full" style={{ animationDelay: '0.3s' }}></div>
             </div>
           </div>
           <Link
@@ -199,15 +223,15 @@ export default async function Home() {
       </section>
 
       <section className="flex flex-col gap-8">
-        <div className="flex flex-col gap-1">
-          <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-            Explorar
+        <div className="flex flex-col gap-2">
+          <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent-premium)]">
+            Explorar Categorias
           </p>
-          <div className="flex items-center gap-3">
-            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+          <div className="flex items-center gap-4">
+            <h2 className="animate-text-reveal font-[var(--font-luxury)] text-4xl sm:text-5xl font-bold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
               Categorias
             </h2>
-            <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
+            <div className="animate-accent-width h-1.5 w-16 bg-[var(--accent-premium)] rounded-full" style={{ animationDelay: '0.3s' }}></div>
           </div>
         </div>
 

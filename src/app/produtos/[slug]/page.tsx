@@ -69,6 +69,9 @@ export default async function ProdutoPage({
   const variants = await getVariants(product);
   const categoryLabel = await getCategoryLabel(product.category);
 
+  // Só entregamos em Portugal e Espanha (ver allowed_countries em
+  // /api/checkout) — a política de devolução e o envio abaixo aplicam-se
+  // aos mesmos dois países.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -84,6 +87,31 @@ export default async function ProdutoPage({
       price: product.price,
       // Não fazemos gestão de stock — presume-se sempre disponível.
       availability: "https://schema.org/InStock",
+      // Direito de livre resolução: 14 dias, sem necessidade de motivo
+      // (ver /devolucoes). Não indicamos "returnFees" (quem paga o envio
+      // de devolução) porque ainda não está decidido.
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: ["PT", "ES"],
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 14,
+        returnMethod: "https://schema.org/ReturnByMail",
+      },
+      // Envio grátis, 10 a 15 dias (ver /faq e /termos) — sem tempo de
+      // processamento à parte, é a estimativa total já publicada no site.
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "EUR" },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: ["PT", "ES"],
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: 10, maxValue: 15, unitCode: "DAY" },
+        },
+      },
     },
   };
 

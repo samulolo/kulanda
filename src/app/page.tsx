@@ -241,7 +241,7 @@ export default async function Home() {
                     {category.description}
                   </p>
                 </div>
-                <span className="link-underline flex w-fit items-center gap-1.5 text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-300">
+                <span className="flex w-fit items-center gap-1.5 text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-300">
                   Explorar coleção
                   <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
                 </span>

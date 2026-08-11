@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_SESSION_COOKIE, getExpectedAdminSessionToken } from "@/lib/admin-auth";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   // A própria página de login (e o endpoint que a serve) tem de ficar
   // acessível sem sessão — senão ninguém consegue lá chegar para entrar.
   if (req.nextUrl.pathname.startsWith("/admin/login")) {

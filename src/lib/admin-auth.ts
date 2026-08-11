@@ -2,7 +2,8 @@
 // sem utilizadores nem base de dados própria. O cookie de sessão guarda um
 // hash SHA-256 da password (nunca a password em texto simples), calculado
 // com Web Crypto (disponível tanto no runtime Node como no Edge, usado
-// pelo middleware).
+// pelo src/proxy.ts — a partir do Next.js 16, "middleware.ts" foi
+// renomeado para "proxy.ts").
 
 export const ADMIN_SESSION_COOKIE = "kulanda_admin_session";
 

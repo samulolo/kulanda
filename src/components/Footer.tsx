@@ -17,8 +17,8 @@ export default async function Footer() {
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed">
               Acessórios essenciais, feitos com atenção ao detalhe: carteiras
-              magnéticas para iPhone, microfones de lapela, ring lights,
-              brilho labial e kits de tripé para quem cria conteúdo.
+              magnéticas para iPhone, microfones de lapela, ring lights e
+              kits de tripé para quem cria conteúdo.
             </p>
             <div className="mt-4 flex items-center gap-2 text-xs text-white/60">
               <ShieldCheck strokeWidth={1.6} className="h-4 w-4 text-[var(--accent)]" />

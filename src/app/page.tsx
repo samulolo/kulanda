@@ -82,27 +82,29 @@ export default async function Home() {
               className="object-cover object-center"
             />
 
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-            <span className="absolute left-6 top-6 w-fit rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur sm:left-8 sm:top-8">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent opacity-30" />
+
+            <span className="animate-text-reveal absolute left-6 top-6 w-fit rounded-full border border-white/40 bg-white/15 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur sm:left-8 sm:top-8">
               Nova coleção
             </span>
 
             <h1
-              className="pointer-events-none absolute inset-x-0 top-[40%] -translate-y-1/2 select-none whitespace-nowrap text-center font-sans text-[19vw] font-extrabold uppercase leading-none tracking-tight text-white sm:text-[8.5vw]"
+              className="pointer-events-none absolute inset-x-0 top-[40%] -translate-y-1/2 select-none whitespace-nowrap text-center font-sans text-[19vw] font-extrabold uppercase leading-none tracking-tight text-white sm:text-[8.5vw] animate-text-reveal"
               style={{ mixBlendMode: "overlay" }}
             >
               Estilo Sem Limites
             </h1>
 
-            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 sm:max-w-xs sm:p-10">
-              <p className="text-[15px] leading-relaxed text-white/90">
+            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 sm:max-w-xs sm:p-10 animate-slide-in-right">
+              <p className="text-[15px] leading-relaxed text-white/95">
                 Carteiras magnéticas com acabamento premium, ímã MagSafe
                 forte e design que acompanha o seu ritmo.
               </p>
               <Link
                 href="/produtos"
-                className="btn-lift w-fit rounded-full bg-white px-6 py-3 text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)] transition-colors hover:bg-[var(--accent-soft)]"
+                className="btn-lift w-fit rounded-full bg-white px-6 py-3 text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)] transition-colors hover:bg-[var(--accent-soft)] hover:shadow-[0_12px_24px_-12px_rgba(28,26,23,0.35)]"
               >
                 Ver Coleção
               </Link>
@@ -111,9 +113,10 @@ export default async function Home() {
             {cardProduct && (
               <Link
                 href={`/produtos/${cardProduct.slug}`}
-                className="group absolute bottom-6 right-6 hidden w-56 items-center gap-3 rounded-2xl bg-white p-3 shadow-[0_20px_40px_-15px_rgba(28,26,23,0.4)] transition-transform duration-300 hover:-translate-y-1 sm:flex"
+                className="group card-lift absolute bottom-6 right-6 hidden w-56 items-center gap-3 rounded-2xl bg-white p-3 shadow-[0_20px_40px_-15px_rgba(28,26,23,0.4)] sm:flex animate-scale-in-up"
+                style={{ animationDelay: '0.4s' }}
               >
-                <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[var(--surface)]">
+                <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[var(--surface)] ring-1 ring-[var(--border)]">
                   <Image
                     src="/hero/carteira-hero-banner.webp"
                     alt={cardProduct.name}
@@ -138,17 +141,20 @@ export default async function Home() {
 
       <section className="flex flex-col gap-8">
         <div className="flex items-end justify-between">
-          <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
+          <div className="flex flex-col gap-1">
+            <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
               Seleção da casa
             </p>
-            <h2 className="mt-1 font-serif text-2xl text-[var(--foreground)]">
-              Destaques
-            </h2>
+            <div className="flex items-center gap-3">
+              <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+                Destaques
+              </h2>
+              <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
+            </div>
           </div>
           <Link
             href="/produtos"
-            className="link-underline text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)]"
+            className="link-underline text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:text-[var(--accent)]"
           >
             Ver todos →
           </Link>
@@ -193,13 +199,16 @@ export default async function Home() {
       </section>
 
       <section className="flex flex-col gap-8">
-        <div>
-          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
+        <div className="flex flex-col gap-1">
+          <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
             Explorar
           </p>
-          <h2 className="mt-1 font-serif text-2xl text-[var(--foreground)]">
-            Categorias
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+              Categorias
+            </h2>
+            <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
@@ -207,7 +216,7 @@ export default async function Home() {
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className={`animate-fade-up group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_25px_50px_-20px_rgba(28,26,23,0.25)] ${category.span}`}
+              className={`card-lift animate-fade-up group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] ${category.span}`}
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <div className="relative h-48 w-full overflow-hidden sm:h-56">
@@ -216,25 +225,25 @@ export default async function Home() {
                   alt={category.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/5 transition-opacity duration-300 group-hover:from-black/50" />
               </div>
               <div className="flex flex-1 flex-col justify-between gap-4 p-6">
                 <div>
                   <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
                     Categoria
                   </p>
-                  <h3 className="mt-1 font-serif text-xl text-[var(--foreground)] transition-colors group-hover:text-[var(--accent-dark)]">
+                  <h3 className="mt-2 font-serif text-lg font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
                     {category.title}
                   </h3>
-                  <p className="mt-2 text-sm text-[var(--muted)]">
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors duration-300">
                     {category.description}
                   </p>
                 </div>
-                <span className="link-underline flex w-fit items-center gap-1 text-sm font-medium text-[var(--foreground)]">
+                <span className="link-underline flex w-fit items-center gap-1.5 text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-300">
                   Explorar coleção
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
                 </span>
               </div>
             </Link>

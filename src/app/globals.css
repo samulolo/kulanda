@@ -118,3 +118,83 @@ body {
 .animate-pulse-pop {
   animation: pulse-pop 0.4s ease;
 }
+
+/* Hover estado para cartões com elevação suave */
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1), box-shadow 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -20px rgba(28, 26, 23, 0.25);
+}
+
+/* Glow sutil para destaque */
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+.glow-subtle {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Scale animation para featured products */
+@keyframes scale-in-up {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-scale-in-up {
+  animation: scale-in-up 0.6s ease both;
+}
+
+/* Slide in from right para featured card */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.7s ease both;
+}
+
+/* Accent bar animation */
+@keyframes accent-width {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.animate-accent-width {
+  animation: accent-width 0.8s ease 0.3s both;
+}
+
+/* Text reveal effect */
+@keyframes text-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-text-reveal {
+  animation: text-reveal 0.6s ease both;
+}

@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Posso trocar ou devolver um produto?",
-    a: "Sim. Tem até 14 dias após a receção para pedir troca ou devolução, ao abrigo do direito de livre resolução — não precisa de indicar motivo, desde que o produto esteja em bom estado e na embalagem original. Consulte a nossa política de devoluções para o processo completo.",
+    a: "Sim. Tem até 14 dias após a receção para pedir troca ou devolução, ao abrigo do direito de livre resolução — não precisa de indicar motivo, desde que o produto esteja em bom estado e na embalagem original. O envio de devolução é da responsabilidade do cliente, com um custo fixo de 4€. Consulte a nossa política de devoluções para o processo completo.",
   },
   {
     q: "Que métodos de pagamento são aceites?",

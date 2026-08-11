@@ -18,7 +18,7 @@ const passos = [
   {
     title: "Troca ou devolução em 14 dias",
     description:
-      "Ao abrigo do direito de livre resolução, tem até 14 dias após a receção para pedir troca ou devolução, sem necessidade de indicar motivo, desde que o produto esteja por usar e na embalagem original.",
+      "Ao abrigo do direito de livre resolução, tem até 14 dias após a receção para pedir troca ou devolução, sem necessidade de indicar motivo, desde que o produto esteja por usar e na embalagem original. O envio de devolução é da responsabilidade do cliente, com um custo fixo de 4€.",
     Icon: RefreshCw,
   },
   {
@@ -58,7 +58,8 @@ export default function DevolucoesPage() {
       <p className="max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
         O valor da devolução é reembolsado através do mesmo método de
         pagamento utilizado na compra, após a receção e verificação do
-        produto devolvido.
+        produto devolvido. O custo de envio da devolução (4€) é da
+        responsabilidade do cliente e é deduzido do valor reembolsado.
       </p>
     </div>
   );

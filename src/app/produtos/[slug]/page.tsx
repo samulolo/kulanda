@@ -88,14 +88,17 @@ export default async function ProdutoPage({
       // Não fazemos gestão de stock — presume-se sempre disponível.
       availability: "https://schema.org/InStock",
       // Direito de livre resolução: 14 dias, sem necessidade de motivo
-      // (ver /devolucoes). Não indicamos "returnFees" (quem paga o envio
-      // de devolução) porque ainda não está decidido.
+      // (ver /devolucoes). O envio de devolução é por conta do cliente,
+      // custo fixo de 4€ — tem de estar visível no site antes da compra
+      // (não só aqui no JSON-LD) para ser válido perante o consumidor.
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: ["PT", "ES"],
         returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
         merchantReturnDays: 14,
         returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/ReturnShippingFees",
+        returnShippingFeesAmount: { "@type": "MonetaryAmount", value: 4, currency: "EUR" },
       },
       // Envio grátis, 10 a 15 dias (ver /faq e /termos) — sem tempo de
       // processamento à parte, é a estimativa total já publicada no site.

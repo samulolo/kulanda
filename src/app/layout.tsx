@@ -17,6 +17,7 @@ import CookieConsentBanner from "@/components/CookieConsentBanner";
 import AnalyticsLoader from "@/components/AnalyticsLoader";
 import { getCategories } from "@/lib/products";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -97,6 +98,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           </CartProvider>
           <CookieConsentBanner />
           <AnalyticsLoader gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <Analytics/>
         </ConsentProvider>
       </body>
     </html>

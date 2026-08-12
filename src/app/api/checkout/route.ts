@@ -119,6 +119,7 @@ export async function POST(req: NextRequest) {
       shipping_options,
       discounts,
       customer_email: body.email || undefined,
+      phone_number_collection: { enabled: true },
       shipping_address_collection: { allowed_countries: ["PT", "ES"] },
       locale: "pt",
       metadata,

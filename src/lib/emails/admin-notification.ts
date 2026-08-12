@@ -4,6 +4,7 @@ export interface AdminNotificationEmailData {
   reference: string;
   email: string;
   customerName?: string | null;
+  phone?: string | null;
   items: { name: string; quantity: number; lineTotal: number }[];
   total: number;
   shippingAddress?: {
@@ -62,7 +63,7 @@ export function renderAdminNotificationEmail(data: AdminNotificationEmailData): 
                   Encomenda #${escapeHtml(data.reference)}
                 </h1>
                 <p style="margin:0 0 16px;font-size:13px;color:#6b665c;">
-                  Cliente: ${escapeHtml(data.customerName ?? "—")} (${escapeHtml(data.email)})
+                  Cliente: ${escapeHtml(data.customerName ?? "—")} (${escapeHtml(data.email)})${data.phone ? ` · ${escapeHtml(data.phone)}` : ""}
                 </p>
               </td>
             </tr>

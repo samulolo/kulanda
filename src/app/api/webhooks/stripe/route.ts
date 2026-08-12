@@ -92,6 +92,7 @@ async function handleCheckoutCompleted(sessionFromEvent: Stripe.Checkout.Session
   const shipping = session.collected_information?.shipping_details;
   const shippingAddress = shipping?.address ?? session.customer_details?.address ?? null;
   const customerName = shipping?.name ?? session.customer_details?.name ?? null;
+  const phone = session.customer_details?.phone ?? null;
 
   const itemTokens = reconstructItemTokens(session.metadata);
   const items = await resolveOrderItems(itemTokens);
@@ -115,6 +116,7 @@ async function handleCheckoutCompleted(sessionFromEvent: Stripe.Checkout.Session
       reference,
       email,
       customer_name: customerName,
+      phone,
       shipping_address: shippingAddress,
       subtotal,
       shipping_fee: shippingFee,
@@ -170,6 +172,7 @@ async function handleCheckoutCompleted(sessionFromEvent: Stripe.Checkout.Session
     email,
     reference,
     customerName,
+    phone,
     items,
     total,
     shippingAddress,
@@ -270,6 +273,7 @@ async function sendAdminNotification(params: {
   email: string;
   reference: string;
   customerName: string | null;
+  phone: string | null;
   items: { name: string; quantity: number; lineTotal: number }[];
   total: number;
   shippingAddress: Stripe.Address | null;
@@ -290,6 +294,7 @@ async function sendAdminNotification(params: {
         reference: params.reference,
         email: params.email,
         customerName: params.customerName,
+        phone: params.phone,
         items: params.items,
         total: params.total,
         shippingAddress: params.shippingAddress,

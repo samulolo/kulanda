@@ -23,6 +23,7 @@ interface OrderRow {
   reference: string;
   email: string;
   customer_name: string | null;
+  phone: string | null;
   total: number;
   currency: string;
   status: string;
@@ -43,7 +44,7 @@ export default async function AdminEncomendasPage() {
   const { data, error } = await supabaseAdmin
     .from("orders")
     .select(
-      `id, reference, email, customer_name, total, currency, status, created_at,
+      `id, reference, email, customer_name, phone, total, currency, status, created_at,
        order_items ( id, product_slug, name, unit_price, quantity, line_total )`
     )
     .order("created_at", { ascending: false });
@@ -118,6 +119,7 @@ export default async function AdminEncomendasPage() {
                   <td className="px-4 py-3">
                     <div className="text-foreground">{order.customer_name || "—"}</div>
                     <div className="text-xs text-muted">{order.email}</div>
+                    {order.phone && <div className="text-xs text-muted">{order.phone}</div>}
                   </td>
                   <td className="px-4 py-3 text-muted">
                     <ul className="space-y-0.5">

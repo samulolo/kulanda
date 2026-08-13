@@ -3,7 +3,9 @@ import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
 import CategoryCircles, { type CategoryCircleItem } from "@/components/CategoryCircles";
+import PromoBanner from "@/components/PromoBanner";
 import { getAllProducts, type Product } from "@/lib/products";
+import { getCardImage } from "@/lib/product-cutouts";
 
 const categoryTiles: CategoryCircleItem[] = [
   {
@@ -60,6 +62,16 @@ export default async function Home() {
   const promoProducts = products.filter(
     (p) => p.compareAtPrice != null && p.compareAtPrice > p.price
   );
+
+  // Desconto máximo real entre os produtos em promoção, para o banner nunca
+  // anunciar um valor inventado — se amanhã os descontos mudarem no admin,
+  // o texto acompanha sozinho.
+  const maxDiscountPct = promoProducts.reduce((max, p) => {
+    const pct = Math.round((1 - p.price / (p.compareAtPrice as number)) * 100);
+    return Math.max(max, pct);
+  }, 0);
+  const promoHighlight = promoProducts[0];
+  const promoImage = promoHighlight ? getCardImage(promoHighlight.image)?.src : undefined;
 
   const carteiraCard = products.find(
     (p) => p.slug === "carteira-magnetica-gerle-cinza"
@@ -178,17 +190,19 @@ export default async function Home() {
 
       {promoProducts.length > 0 && (
         <section className="flex flex-col gap-8">
-          <div className="flex items-end justify-between">
-            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--accent-dark)]">
-              Em Promoção
-            </h2>
-            <Link
-              href="/produtos"
-              className="link-underline text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:text-[var(--accent)]"
-            >
-              Ver todos →
-            </Link>
-          </div>
+          <PromoBanner
+            eyebrow="Promoção em produtos selecionados"
+            headline={
+              maxDiscountPct > 0
+                ? `Até ${maxDiscountPct}% de desconto direto`
+                : "Descontos diretos"
+            }
+            description="Numa seleção de acessórios para criadores de conteúdo."
+            ctaHref="/produtos"
+            ctaLabel="Ver produtos"
+            image={promoImage}
+            imageAlt={promoHighlight?.name}
+          />
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
             {promoProducts.map((product, index) => (
               <ProductCard key={product.slug} product={product} index={index} />

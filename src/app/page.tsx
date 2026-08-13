@@ -1,38 +1,29 @@
 import Link from "next/link";
-import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
+import CategoryCircles, { type CategoryCircleItem } from "@/components/CategoryCircles";
 import { getAllProducts, type Product } from "@/lib/products";
 
-const categoryTiles: {
-  id: Product["category"];
-  title: string;
-  tagline: string;
-  image: string;
-}[] = [
+const categoryTiles: CategoryCircleItem[] = [
   {
     id: "carteiras",
     title: "Carteiras Magnéticas",
-    tagline: "Compatível com MagSafe",
     image: "/products/carteira-magnetica-grafite-apoio.webp",
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
-    tagline: "Sem fio, para criar conteúdo",
     image: "/products/microfone-lapela-duplo-typec.webp",
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
-    tagline: "Luz de preenchimento portátil",
     image: "/products/ring-light-magnetico.webp",
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
-    tagline: "3 em 1, com comando remoto",
     image: "/products/tripe-selfie-stick-produto.webp",
   },
 ];
@@ -117,35 +108,7 @@ export default async function Home() {
       <TrustBar />
 
       <section className="flex flex-col gap-6">
-        <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]">
-          Categorias
-        </h2>
-
-        <div className="scrollbar-hide flex snap-x snap-mandatory gap-x-5 gap-y-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0">
-          {categoryTiles.map((category, index) => (
-            <Link
-              key={category.id}
-              href={`/produtos?categoria=${category.id}`}
-              className="animate-fade-up group flex w-16 shrink-0 snap-start flex-col items-center gap-2 text-center sm:w-auto"
-              style={{ animationDelay: `${index * 80}ms` }}
-            >
-              <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
-                <span className="absolute inset-2">
-                  <Image
-                    src={category.image}
-                    alt=""
-                    fill
-                    sizes="80px"
-                    className="object-contain"
-                  />
-                </span>
-              </span>
-              <span className="text-xs font-medium leading-snug text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-                {category.title}
-              </span>
-            </Link>
-          ))}
-        </div>
+        <CategoryCircles categories={categoryTiles} />
       </section>
 
       <section className="flex flex-col gap-8">

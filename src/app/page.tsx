@@ -131,7 +131,7 @@ export default async function Home() {
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <div>
-                <h3 className="font-serif text-base font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+                <h3 className="font-serif text-xs font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
                   {category.title}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">

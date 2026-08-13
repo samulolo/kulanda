@@ -1,41 +1,34 @@
 import Link from "next/link";
-import type { ComponentType } from "react";
-import { Wallet, Mic, Lightbulb } from "lucide-react";
+import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
-import TripodIcon from "@/components/TripodIcon";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
 import { getAllProducts, type Product } from "@/lib/products";
 
 const categoryTiles: {
   id: Product["category"];
   title: string;
-  tagline: string;
-  Icon: ComponentType<{ className?: string; strokeWidth?: number }>;
+  image: string;
 }[] = [
   {
     id: "carteiras",
     title: "Carteiras Magnéticas",
-    tagline: "Compatível com MagSafe",
-    Icon: Wallet,
+    image: "/products/carteira-magnetica-gerle-textura-preta.webp",
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
-    tagline: "Sem fio, para criar conteúdo",
-    Icon: Mic,
+    image: "/products/microfone-lapela-duplo-typec.webp",
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
-    tagline: "Luz de preenchimento portátil",
-    Icon: Lightbulb,
+    image: "/products/ring-light-magnetico.webp",
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
-    tagline: "3 em 1, com comando remoto",
-    Icon: TripodIcon,
+    image: "/products/tripe-selfie-stick-produto.webp",
   },
 ];
 
@@ -131,24 +124,27 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-y-6 sm:grid-cols-4">
           {categoryTiles.map((category, index) => (
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className="card-lift animate-fade-up group flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
+              className="animate-fade-up group flex flex-col items-center gap-3 text-center"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div>
-                <h3 className="font-serif text-base font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-                  {category.title}
-                </h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
-                  {category.tagline}
-                </p>
-              </div>
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] transition-transform duration-300 group-hover:scale-110">
-                <category.Icon strokeWidth={1.6} className="h-5 w-5 text-[var(--accent-dark)]" />
+              <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24">
+                <span className="absolute inset-3">
+                  <Image
+                    src={category.image}
+                    alt=""
+                    fill
+                    sizes="96px"
+                    className="object-contain"
+                  />
+                </span>
+              </span>
+              <span className="text-sm font-medium leading-snug text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+                {category.title}
               </span>
             </Link>
           ))}

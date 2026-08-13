@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
+import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
 import { getAllProducts, type Product } from "@/lib/products";
 
 const categoryTiles: {
@@ -64,77 +65,62 @@ export default async function Home() {
 
   const destaques = extra ? [...featuredByCategory, extra] : featuredByCategory;
 
-  const cardProduct = products.find(
+  const carteiraCard = products.find(
     (p) => p.slug === "carteira-magnetica-gerle-cinza"
   );
+  const ringLightCard = products.find(
+    (p) => p.slug === "ring-light-magnetico-3-em-1"
+  );
+
+  // Hero rotativo: a carteira teve o hero só para ela durante um tempo, mas
+  // as campanhas mostraram mais interesse real no ring light/tripé do que
+  // nas carteiras — por isso o hero passa a mostrar mais do que uma
+  // categoria. O tripé fica de fora por agora: a única foto que temos dele
+  // é quase quadrada e baixa resolução (822×826px), ficaria desfocada
+  // esticada a 100% da largura — entra quando houver uma foto à altura.
+  const heroSlides: HeroSlide[] = [
+    {
+      id: "carteiras",
+      image: "/hero/carteira-hero-banner.webp",
+      imageAlt: "Carteira magnética Kulanda em destaque",
+      badge: "Nova coleção",
+      headline: "Estilo Sem Limites",
+      description:
+        "Carteiras magnéticas com acabamento premium, ímã MagSafe forte e design que acompanha o seu ritmo.",
+      ctaHref: "/produtos?categoria=carteiras",
+      ctaLabel: "Ver Coleção",
+      card: carteiraCard
+        ? {
+            href: `/produtos/${carteiraCard.slug}`,
+            image: "/hero/carteira-hero-banner.webp",
+            name: carteiraCard.name,
+          }
+        : undefined,
+    },
+    {
+      id: "iluminacao",
+      image: "/products/ring-light-magnetico.webp",
+      imageAlt: "Ring light magnético Kulanda em destaque",
+      badge: "Novo",
+      headline: "Luz Sem Limites",
+      description:
+        "Luz de preenchimento LED magnética 3 em 1, com espelho embutido e encaixe direto no MagSafe do iPhone.",
+      ctaHref: "/produtos?categoria=iluminacao",
+      ctaLabel: "Ver Coleção",
+      card: ringLightCard
+        ? {
+            href: `/produtos/${ringLightCard.slug}`,
+            image: ringLightCard.image,
+            name: ringLightCard.name,
+          }
+        : undefined,
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-20">
       <section className="flex flex-col gap-6">
-        <div className="animate-fade-up relative isolate overflow-hidden rounded-[2rem] shadow-[0_40px_80px_-20px_rgba(28,26,23,0.4)]">
-          <div className="relative h-[440px] w-full sm:h-[540px]">
-            <Image
-              src="/hero/carteira-hero-banner.webp"
-              alt="Carteira magnética Kulanda em destaque"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent opacity-30" />
-
-            <span className="animate-text-reveal absolute left-6 top-6 w-fit rounded-full border border-white/40 bg-white/15 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur sm:left-8 sm:top-8">
-              Nova coleção
-            </span>
-
-            <h1
-              className="pointer-events-none absolute inset-x-0 top-[40%] -translate-y-1/2 select-none whitespace-nowrap text-center font-sans text-[19vw] font-extrabold uppercase leading-none tracking-tight text-white sm:text-[8.5vw] animate-text-reveal"
-              style={{ mixBlendMode: "overlay" }}
-            >
-              Estilo Sem Limites
-            </h1>
-
-            <div className="absolute inset-x-0 bottom-0 flex flex-col gap-4 p-6 sm:max-w-xs sm:p-10 animate-slide-in-right">
-              <p className="text-[15px] leading-relaxed text-white/95">
-                Carteiras magnéticas com acabamento premium, ímã MagSafe
-                forte e design que acompanha o seu ritmo.
-              </p>
-              <Link
-                href="/produtos"
-                className="btn-lift w-fit rounded-full bg-white px-6 py-3 text-[13px] font-medium uppercase tracking-wide text-[var(--foreground)] transition-colors hover:bg-[var(--accent-soft)] hover:shadow-[0_12px_24px_-12px_rgba(28,26,23,0.35)]"
-              >
-                Ver Coleção
-              </Link>
-            </div>
-
-            {cardProduct && (
-              <Link
-                href={`/produtos/${cardProduct.slug}`}
-                className="group card-lift absolute bottom-6 right-6 hidden w-56 items-center gap-3 rounded-2xl bg-white p-3 shadow-[0_20px_40px_-15px_rgba(28,26,23,0.4)] sm:flex animate-scale-in-up"
-                style={{ animationDelay: '0.4s' }}
-              >
-                <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-[var(--surface)] ring-1 ring-[var(--border)]">
-                  <Image
-                    src="/hero/carteira-hero-banner.webp"
-                    alt={cardProduct.name}
-                    fill
-                    sizes="56px"
-                    className="object-cover object-center"
-                  />
-                </span>
-                <span className="flex items-center gap-1.5 text-[13px] font-medium leading-snug text-[var(--foreground)]">
-                  Ver Detalhes do Produto
-                  <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
-                    →
-                  </span>
-                </span>
-              </Link>
-            )}
-          </div>
-        </div>
+        <HeroCarousel slides={heroSlides} />
       </section>
 
       <TrustBar />

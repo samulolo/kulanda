@@ -32,10 +32,10 @@ export function renderAdminNotificationEmail(data: AdminNotificationEmailData): 
     .map(
       (item) => `
         <tr>
-          <td style="padding:8px 0;border-bottom:1px solid #e6e2d8;color:#1c1a17;font-size:14px;">
+          <td style="padding:8px 0;border-bottom:1px solid #ede1da;color:#1c1a17;font-size:14px;">
             ${escapeHtml(item.name)} × ${item.quantity}
           </td>
-          <td style="padding:8px 0;border-bottom:1px solid #e6e2d8;color:#1c1a17;font-size:14px;text-align:right;white-space:nowrap;">
+          <td style="padding:8px 0;border-bottom:1px solid #ede1da;color:#1c1a17;font-size:14px;text-align:right;white-space:nowrap;">
             ${formatPrice(item.lineTotal)}
           </td>
         </tr>`
@@ -49,20 +49,20 @@ export function renderAdminNotificationEmail(data: AdminNotificationEmailData): 
   return `
 <!DOCTYPE html>
 <html lang="pt-PT">
-  <body style="margin:0;padding:0;background:#faf9f6;font-family:Arial,Helvetica,sans-serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf9f6;padding:32px 16px;">
+  <body style="margin:0;padding:0;background:#fdf8f5;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fdf8f5;padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border:1px solid #e6e2d8;border-radius:12px;overflow:hidden;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border:1px solid #ede1da;border-radius:12px;overflow:hidden;">
             <tr>
               <td style="padding:24px 32px 4px;">
-                <p style="margin:0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#a9824c;">
+                <p style="margin:0;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#c8421f;">
                   Nova venda na Kulanda
                 </p>
                 <h1 style="margin:8px 0 4px;font-size:20px;color:#1c1a17;">
                   Encomenda #${escapeHtml(data.reference)}
                 </h1>
-                <p style="margin:0 0 16px;font-size:13px;color:#6b665c;">
+                <p style="margin:0 0 16px;font-size:13px;color:#6b6058;">
                   Cliente: ${escapeHtml(data.customerName ?? "—")} (${escapeHtml(data.email)})${data.phone ? ` · ${escapeHtml(data.phone)}` : ""}
                 </p>
               </td>
@@ -80,8 +80,8 @@ export function renderAdminNotificationEmail(data: AdminNotificationEmailData): 
             </tr>
             <tr>
               <td style="padding:0 32px 24px;">
-                <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#a9824c;">Morada de entrega</p>
-                <p style="margin:0;color:#6b665c;font-size:13px;line-height:1.6;">${morada}</p>
+                <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#c8421f;">Morada de entrega</p>
+                <p style="margin:0;color:#6b6058;font-size:13px;line-height:1.6;">${morada}</p>
               </td>
             </tr>
           </table>

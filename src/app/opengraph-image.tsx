@@ -16,7 +16,7 @@ export default function OpengraphImage() {
           alignItems: "center",
           justifyContent: "center",
           background:
-            "linear-gradient(155deg, #faf9f6 0%, #f1e6d2 45%, #faf9f6 100%)",
+            "linear-gradient(155deg, #fdf8f5 0%, #fae2d5 45%, #fdf8f5 100%)",
         }}
       >
         <div
@@ -28,14 +28,14 @@ export default function OpengraphImage() {
           }}
         >
           Kul
-          <span style={{ color: "#a9824c", fontStyle: "italic" }}>anda</span>
+          <span style={{ color: "#c8421f", fontStyle: "italic" }}>anda</span>
         </div>
         <div
           style={{
             display: "flex",
             marginTop: 24,
             fontSize: 32,
-            color: "#6b665c",
+            color: "#6b6058",
             letterSpacing: 2,
             textTransform: "uppercase",
           }}

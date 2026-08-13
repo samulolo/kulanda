@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf9f6;
+  /* Paleta "Coral Energético" — trocada da anterior (creme + dourado,
+     ar de boutique) por ser pouco vibrante. Cores validadas para
+     contraste AA (WCAG) contra o fundo/superfícies: accent 4.94:1 sobre
+     branco, accent-dark 7.25:1, foreground 17.36:1. */
+  --background: #fdf8f5;
   --foreground: #1c1a17;
   --surface: #ffffff;
-  --muted: #6b665c;
-  --border: #e6e2d8;
-  --accent: #a9824c;
-  --accent-dark: #8a6a3c;
-  --accent-soft: #f1e6d2;
+  --muted: #6b6058;
+  --border: #ede1da;
+  --accent: #c8421f;
+  --accent-dark: #9c3315;
+  --accent-soft: #fae2d5;
 }
 
 @theme inline {

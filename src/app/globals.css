@@ -27,11 +27,12 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   /* Nome da variável mantido por compatibilidade — é usada pela classe
      utilitária "font-serif" em ~19 ficheiros para os títulos. Deixou de
-     ser uma serifa: trocada de Fraunces para Space Grotesk (mais viva,
-     geométrica) a pedido do dono da loja. Note-se que o Space Grotesk
-     não tem corte itálico próprio — o "anda" itálico do logótipo
-     (Header/Footer) passa a itálico sintético do browser. */
-  --font-serif: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+     ser uma serifa: trocada de Fraunces para Poppins (arredondada,
+     amigável) a pedido do dono da loja — combinação "arredondada
+     amigável" das opções mostradas. Ao contrário do Space Grotesk
+     (tentativa anterior), o Poppins tem corte itálico próprio, por
+     isso o "anda" itálico do logótipo continua a usar itálico real. */
+  --font-serif: "Poppins", ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

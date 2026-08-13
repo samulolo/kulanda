@@ -9,21 +9,25 @@ const categoryTiles: CategoryCircleItem[] = [
   {
     id: "carteiras",
     title: "Carteiras Magnéticas",
+    shortTitle: "Carteiras",
     image: "/products/carteira-magnetica-grafite-apoio.webp",
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
+    shortTitle: "Microfones",
     image: "/products/microfone-lapela-duplo-typec.webp",
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
+    shortTitle: "Ring Lights",
     image: "/products/ring-light-magnetico.webp",
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
+    shortTitle: "Tripés",
     image: "/products/tripe-selfie-stick-produto.webp",
   },
 ];
@@ -108,6 +112,9 @@ export default async function Home() {
       <TrustBar />
 
       <section className="flex flex-col gap-6">
+        <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]">
+          Categorias
+        </h2>
         <CategoryCircles categories={categoryTiles} />
       </section>
 

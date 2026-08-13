@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
@@ -8,26 +9,31 @@ import { getAllProducts, type Product } from "@/lib/products";
 const categoryTiles: {
   id: Product["category"];
   title: string;
+  tagline: string;
   image: string;
 }[] = [
   {
     id: "carteiras",
     title: "Carteiras Magnéticas",
+    tagline: "Compatível com MagSafe",
     image: "/products/carteira-magnetica-gerle-textura-preta.webp",
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
+    tagline: "Sem fio, para criar conteúdo",
     image: "/products/microfone-lapela-duplo-typec.webp",
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
+    tagline: "Luz de preenchimento portátil",
     image: "/products/ring-light-magnetico.webp",
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
+    tagline: "3 em 1, com comando remoto",
     image: "/products/tripe-selfie-stick-produto.webp",
   },
 ];
@@ -112,52 +118,58 @@ export default async function Home() {
       <TrustBar />
 
       <section className="flex flex-col gap-6">
-        <div className="flex flex-col gap-1">
-          <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-            Explorar
-          </p>
-          <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
-            Categorias
-          </h2>
-        </div>
+        <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]">
+          Categorias
+        </h2>
 
-        <div className="grid grid-cols-2 gap-y-6 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {categoryTiles.map((category, index) => (
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className="animate-fade-up group flex flex-col items-center gap-3 text-center"
+              className="card-lift animate-fade-up group flex min-h-[168px] flex-col justify-between gap-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24">
-                <span className="absolute inset-3">
+              <div>
+                <h3 className="font-serif text-base font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+                  {category.title}
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
+                  {category.tagline}
+                </p>
+              </div>
+              <span className="relative ml-auto h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-110">
+                <span className="absolute inset-2">
                   <Image
                     src={category.image}
                     alt=""
                     fill
-                    sizes="96px"
+                    sizes="56px"
                     className="object-contain"
                   />
                 </span>
               </span>
-              <span className="text-sm font-medium leading-snug text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-                {category.title}
-              </span>
             </Link>
           ))}
+
+          <Link
+            href="/produtos"
+            className="card-lift animate-fade-up group flex min-h-[168px] flex-col items-center justify-center gap-3 rounded-2xl bg-[var(--accent)] p-5 text-white transition-colors duration-300 hover:bg-[var(--accent-dark)]"
+            style={{ animationDelay: `${categoryTiles.length * 80}ms` }}
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform duration-300 group-hover:translate-x-1">
+              <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
+            </span>
+            <span className="text-sm font-medium">Ver tudo</span>
+          </Link>
         </div>
       </section>
 
       <section className="flex flex-col gap-8">
         <div className="flex items-end justify-between">
-          <div className="flex flex-col gap-1">
-            <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-              Seleção da casa
-            </p>
-            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
-              Destaques
-            </h2>
-          </div>
+          <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]">
+            Destaques
+          </h2>
           <Link
             href="/produtos"
             className="link-underline text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:text-[var(--accent)]"

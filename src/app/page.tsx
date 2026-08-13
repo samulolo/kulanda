@@ -10,25 +10,31 @@ const categoryTiles: CategoryCircleItem[] = [
     id: "carteiras",
     title: "Carteiras Magnéticas",
     shortTitle: "Carteiras",
-    image: "/products/carteira-magnetica-grafite-apoio.webp",
+    image: "/products/cutouts/carteiras.png",
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
     shortTitle: "Microfones",
-    image: "/products/microfone-lapela-duplo-typec.webp",
+    image: "/products/cutouts/microfones.png",
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
     shortTitle: "Ring Lights",
-    image: "/products/ring-light-magnetico.webp",
+    image: "/products/cutouts/iluminacao.png",
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
     shortTitle: "Tripés",
-    image: "/products/tripe-selfie-stick-produto.webp",
+    image: "/products/cutouts/tripes.png",
+  },
+  {
+    id: "pet",
+    title: "Pet",
+    shortTitle: "Pet",
+    image: "/products/cutouts/pet.png",
   },
 ];
 

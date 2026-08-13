@@ -98,10 +98,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             type="button"
             onClick={handleAddToCart}
             aria-label={added ? "Adicionado ao carrinho" : "Adicionar ao carrinho"}
-            className={`btn-lift flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors ${
-              added
-                ? "border-[var(--accent)] bg-[var(--accent)] text-white"
-                : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-white"
+            className={`btn-lift flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-colors ${
+              added ? "bg-[var(--accent-dark)]" : "bg-[var(--accent)] hover:bg-[var(--accent-dark)]"
             }`}
           >
             {added ? <Check className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" strokeWidth={1.8} />}

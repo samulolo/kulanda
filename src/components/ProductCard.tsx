@@ -7,6 +7,7 @@ import type { Product } from "@/lib/products";
 import { formatPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
 import { useFavorites } from "@/lib/favorites-context";
+import { getCardImage } from "@/lib/product-cutouts";
 import ProductImage from "./ProductImage";
 
 interface ProductCardProps {
@@ -20,6 +21,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [added, setAdded] = useState(false);
   const wishlisted = isFavorite(product.slug);
   const hoverImage = product.images?.find((img) => img !== product.image);
+  const cardImage = getCardImage(product.image);
+  const cardHoverImage = getCardImage(hoverImage)?.src;
 
   function handleAddToCart(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -45,14 +48,16 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         <ProductImage
           color={product.color}
           emoji={product.emoji}
-          image={product.image}
-          hoverImage={hoverImage}
+          image={cardImage?.src ?? product.image}
+          hoverImage={cardHoverImage ?? hoverImage}
           alt={product.name}
           bordered={false}
           fit="contain"
           imagePadding="p-6 sm:p-8"
           className="h-56 w-full rounded-2xl sm:h-72"
-          bgClassName="bg-[var(--accent-soft)]/70"
+          bgClassName={
+            cardImage?.transparent ? "bg-[var(--accent-soft)]/70" : "bg-[var(--surface)]"
+          }
           iconClassName="h-20 w-20 transition-transform duration-500 group-hover:scale-105"
         />
         <button

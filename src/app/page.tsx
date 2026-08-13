@@ -10,25 +10,25 @@ const categoryTiles: CategoryCircleItem[] = [
     id: "carteiras",
     title: "Carteiras Magnéticas",
     shortTitle: "Carteiras",
-    image: "/products/cutouts/carteiras.png",
+    image: "/products/cutouts/carteira-magnetica-grafite-apoio.png",
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
     shortTitle: "Microfones",
-    image: "/products/cutouts/microfones.png",
+    image: "/products/cutouts/microfone-lapela-duplo-typec.png",
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
     shortTitle: "Ring Lights",
-    image: "/products/cutouts/iluminacao.png",
+    image: "/products/cutouts/ring-light-magnetico.png",
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
     shortTitle: "Tripés",
-    image: "/products/cutouts/tripes.png",
+    image: "/products/cutouts/tripe-selfie-stick-produto.png",
   },
   {
     id: "pet",
@@ -118,9 +118,6 @@ export default async function Home() {
       <TrustBar />
 
       <section className="flex flex-col gap-6">
-        <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]">
-          Categorias
-        </h2>
         <CategoryCircles categories={categoryTiles} />
       </section>
 

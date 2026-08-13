@@ -122,12 +122,12 @@ export default async function Home() {
           Categorias
         </h2>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 lg:grid-cols-5">
           {categoryTiles.map((category, index) => (
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className="card-lift animate-fade-up group flex min-h-[168px] flex-col justify-between gap-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
+              className="card-lift animate-fade-up group flex min-h-[168px] w-40 shrink-0 snap-start flex-col justify-between gap-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:w-auto"
               style={{ animationDelay: `${index * 80}ms` }}
             >
               <div>
@@ -154,7 +154,7 @@ export default async function Home() {
 
           <Link
             href="/produtos"
-            className="card-lift animate-fade-up group flex min-h-[168px] flex-col items-center justify-center gap-3 rounded-2xl bg-[var(--accent)] p-5 text-white transition-colors duration-300 hover:bg-[var(--accent-dark)]"
+            className="card-lift animate-fade-up group flex min-h-[168px] w-40 shrink-0 snap-start flex-col items-center justify-center gap-3 rounded-2xl bg-[var(--accent)] p-5 text-white transition-colors duration-300 hover:bg-[var(--accent-dark)] sm:w-auto"
             style={{ animationDelay: `${categoryTiles.length * 80}ms` }}
           >
             <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform duration-300 group-hover:translate-x-1">

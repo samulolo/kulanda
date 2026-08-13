@@ -41,7 +41,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   return (
     <Link
       href={`/produtos/${product.slug}`}
-      className="animate-fade-up group flex flex-col gap-3"
+      className="animate-fade-up group flex flex-col gap-3 rounded-3xl bg-[var(--accent-soft)]/70 p-3 sm:p-4"
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
       <div className="relative">
@@ -55,9 +55,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           fit="contain"
           imagePadding="p-6 sm:p-8"
           className="h-56 w-full rounded-2xl sm:h-72"
-          bgClassName={
-            cardImage?.transparent ? "bg-[var(--accent-soft)]/70" : "bg-[var(--surface)]"
-          }
           iconClassName="h-20 w-20 transition-transform duration-500 group-hover:scale-105"
         />
         <button
@@ -74,7 +71,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </button>
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-1.5 px-1 pb-1">
         <div className="flex items-start justify-between gap-2">
           <h3 className="line-clamp-2 text-sm text-[var(--foreground)] transition-colors group-hover:text-[var(--muted)]">
             {product.name}

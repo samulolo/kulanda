@@ -121,31 +121,28 @@ export default async function Home() {
           Categorias
         </h2>
 
-        <div className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0">
+        <div className="scrollbar-hide flex snap-x snap-mandatory gap-x-8 gap-y-6 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0">
           {categoryTiles.map((category, index) => (
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className="card-lift animate-fade-up group flex w-40 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] sm:w-auto"
+              className="animate-fade-up group flex w-20 shrink-0 snap-start flex-col items-center gap-3 text-center sm:w-auto"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="relative h-28 w-full overflow-hidden sm:h-32">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  fill
-                  sizes="(max-width: 640px) 160px, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-col gap-1 p-4">
-                <h3 className="font-serif text-xs font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-                  {category.title}
-                </h3>
-                <p className="text-xs leading-relaxed text-[var(--muted)]">
-                  {category.tagline}
-                </p>
-              </div>
+              <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24">
+                <span className="absolute inset-3">
+                  <Image
+                    src={category.image}
+                    alt=""
+                    fill
+                    sizes="96px"
+                    className="object-contain"
+                  />
+                </span>
+              </span>
+              <span className="text-sm font-medium leading-snug text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+                {category.title}
+              </span>
             </Link>
           ))}
         </div>

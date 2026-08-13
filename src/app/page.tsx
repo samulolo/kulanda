@@ -57,6 +57,10 @@ export default async function Home() {
 
   const destaques = extra ? [...featuredByCategory, extra] : featuredByCategory;
 
+  const promoProducts = products.filter(
+    (p) => p.compareAtPrice != null && p.compareAtPrice > p.price
+  );
+
   const carteiraCard = products.find(
     (p) => p.slug === "carteira-magnetica-gerle-cinza"
   );
@@ -171,6 +175,27 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      {promoProducts.length > 0 && (
+        <section className="flex flex-col gap-8">
+          <div className="flex items-end justify-between">
+            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--accent-dark)]">
+              Em Promoção
+            </h2>
+            <Link
+              href="/produtos"
+              className="link-underline text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:text-[var(--accent)]"
+            >
+              Ver todos →
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
+            {promoProducts.map((product, index) => (
+              <ProductCard key={product.slug} product={product} index={index} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

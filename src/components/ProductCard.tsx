@@ -41,7 +41,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   return (
     <Link
       href={`/produtos/${product.slug}`}
-      className="animate-fade-up group flex flex-col gap-3 rounded-3xl border border-[var(--border)] p-3 transition-colors duration-300 hover:border-[var(--accent)]/40 sm:p-4"
+      className="animate-fade-up group flex flex-col gap-3 rounded-3xl border border-[var(--border)] p-3 shadow-[0_6px_16px_-10px_rgba(28,26,23,0.22)] transition-all duration-300 hover:border-[var(--accent)]/40 hover:shadow-[0_16px_30px_-14px_rgba(28,26,23,0.3)] sm:p-4"
       style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
     >
       <div className="relative">

@@ -59,10 +59,10 @@ export default async function ProdutosPage({
           {tituloCategoria}
         </h1>
 
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-5 flex overflow-x-scroll gap-2">
           <Link
             href="/produtos"
-            className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors ${
+            className={`rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition-colors ${
               !categoriaValida
                 ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
                 : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
@@ -74,7 +74,7 @@ export default async function ProdutosPage({
             <Link
               key={c.id}
               href={`/produtos?categoria=${c.id}`}
-              className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-wide transition-colors ${
+              className={`rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide transition-colors ${
                 categoriaValida === c.id
                   ? "border-[var(--foreground)] bg-[var(--foreground)] text-white"
                   : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"

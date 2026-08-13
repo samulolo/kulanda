@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
@@ -60,14 +59,16 @@ export default async function Home() {
   const carteiraCard = products.find(
     (p) => p.slug === "carteira-magnetica-gerle-cinza"
   );
+  const ringLightCard = products.find(
+    (p) => p.slug === "ring-light-magnetico-3-em-1"
+  );
 
-  // Hero volta a ser só a carteira por agora: chegámos a testar um
-  // carrossel com o ring light também, mas essa foto é um still de
-  // catálogo em fundo branco chapado, sem luz/composição nenhuma — ao
-  // lado da foto de estúdio da carteira ficava a destoar e a puxar o
-  // hero para baixo em vez de parecer mais premium. Volta a entrar
-  // quando houver uma foto do ring light com o mesmo tratamento de
-  // estúdio (fundo escuro, luz trabalhada).
+  // Hero rotativo: a carteira teve o hero só para ela durante um tempo, mas
+  // as campanhas mostraram mais interesse real no ring light/tripé do que
+  // nas carteiras — por isso o hero passa a mostrar mais do que uma
+  // categoria. O tripé fica de fora por agora: a única foto que temos dele
+  // é quase quadrada e baixa resolução (822×826px), ficaria desfocada
+  // esticada a 100% da largura — entra quando houver uma foto à altura.
   const heroSlides: HeroSlide[] = [
     {
       id: "carteiras",
@@ -87,6 +88,24 @@ export default async function Home() {
           }
         : undefined,
     },
+    {
+      id: "iluminacao",
+      image: "/products/ring-light-magnetico.webp",
+      imageAlt: "Ring light magnético Kulanda em destaque",
+      badge: "Novo",
+      headline: "Luz Sem Limites",
+      description:
+        "Luz de preenchimento LED magnética 3 em 1, com espelho embutido e encaixe direto no MagSafe do iPhone.",
+      ctaHref: "/produtos?categoria=iluminacao",
+      ctaLabel: "Ver Coleção",
+      card: ringLightCard
+        ? {
+            href: `/produtos/${ringLightCard.slug}`,
+            image: ringLightCard.image,
+            name: ringLightCard.name,
+          }
+        : undefined,
+    },
   ];
 
   return (
@@ -102,46 +121,33 @@ export default async function Home() {
           Categorias
         </h2>
 
-        <div className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 lg:grid-cols-5">
+        <div className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0">
           {categoryTiles.map((category, index) => (
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className="card-lift animate-fade-up group flex min-h-[168px] w-40 shrink-0 snap-start flex-col justify-between gap-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:w-auto"
+              className="card-lift animate-fade-up group flex w-40 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] sm:w-auto"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div>
+              <div className="relative h-28 w-full overflow-hidden sm:h-32">
+                <Image
+                  src={category.image}
+                  alt={category.title}
+                  fill
+                  sizes="(max-width: 640px) 160px, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="flex flex-col gap-1 p-4">
                 <h3 className="font-serif text-xs font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
                   {category.title}
                 </h3>
-                <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
+                <p className="text-xs leading-relaxed text-[var(--muted)]">
                   {category.tagline}
                 </p>
               </div>
-              <span className="relative ml-auto h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-110">
-                <span className="absolute inset-2">
-                  <Image
-                    src={category.image}
-                    alt=""
-                    fill
-                    sizes="56px"
-                    className="object-contain"
-                  />
-                </span>
-              </span>
             </Link>
           ))}
-
-          <Link
-            href="/produtos"
-            className="card-lift animate-fade-up group flex min-h-[168px] w-40 shrink-0 snap-start flex-col items-center justify-center gap-3 rounded-2xl bg-[var(--accent)] p-5 text-white transition-colors duration-300 hover:bg-[var(--accent-dark)] sm:w-auto"
-            style={{ animationDelay: `${categoryTiles.length * 80}ms` }}
-          >
-            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform duration-300 group-hover:translate-x-1">
-              <ArrowRight className="h-5 w-5" strokeWidth={1.8} />
-            </span>
-            <span className="text-sm font-medium">Ver tudo</span>
-          </Link>
         </div>
       </section>
 

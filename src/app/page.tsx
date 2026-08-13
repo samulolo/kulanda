@@ -116,12 +116,9 @@ export default async function Home() {
           <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
             Explorar
           </p>
-          <div className="flex items-center gap-3">
-            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
-              Categorias
-            </h2>
-            <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
-          </div>
+          <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+            Categorias
+          </h2>
         </div>
 
         <div className="grid grid-cols-2 gap-y-6 sm:grid-cols-4">
@@ -157,12 +154,9 @@ export default async function Home() {
             <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
               Seleção da casa
             </p>
-            <div className="flex items-center gap-3">
-              <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
-                Destaques
-              </h2>
-              <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
-            </div>
+            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+              Destaques
+            </h2>
           </div>
           <Link
             href="/produtos"

@@ -60,16 +60,14 @@ export default async function Home() {
   const carteiraCard = products.find(
     (p) => p.slug === "carteira-magnetica-gerle-cinza"
   );
-  const ringLightCard = products.find(
-    (p) => p.slug === "ring-light-magnetico-3-em-1"
-  );
 
-  // Hero rotativo: a carteira teve o hero só para ela durante um tempo, mas
-  // as campanhas mostraram mais interesse real no ring light/tripé do que
-  // nas carteiras — por isso o hero passa a mostrar mais do que uma
-  // categoria. O tripé fica de fora por agora: a única foto que temos dele
-  // é quase quadrada e baixa resolução (822×826px), ficaria desfocada
-  // esticada a 100% da largura — entra quando houver uma foto à altura.
+  // Hero volta a ser só a carteira por agora: chegámos a testar um
+  // carrossel com o ring light também, mas essa foto é um still de
+  // catálogo em fundo branco chapado, sem luz/composição nenhuma — ao
+  // lado da foto de estúdio da carteira ficava a destoar e a puxar o
+  // hero para baixo em vez de parecer mais premium. Volta a entrar
+  // quando houver uma foto do ring light com o mesmo tratamento de
+  // estúdio (fundo escuro, luz trabalhada).
   const heroSlides: HeroSlide[] = [
     {
       id: "carteiras",
@@ -86,24 +84,6 @@ export default async function Home() {
             href: `/produtos/${carteiraCard.slug}`,
             image: "/hero/carteira-hero-banner.webp",
             name: carteiraCard.name,
-          }
-        : undefined,
-    },
-    {
-      id: "iluminacao",
-      image: "/products/ring-light-magnetico.webp",
-      imageAlt: "Ring light magnético Kulanda em destaque",
-      badge: "Novo",
-      headline: "Luz Sem Limites",
-      description:
-        "Luz de preenchimento LED magnética 3 em 1, com espelho embutido e encaixe direto no MagSafe do iPhone.",
-      ctaHref: "/produtos?categoria=iluminacao",
-      ctaLabel: "Ver Coleção",
-      card: ringLightCard
-        ? {
-            href: `/produtos/${ringLightCard.slug}`,
-            image: ringLightCard.image,
-            name: ringLightCard.name,
           }
         : undefined,
     },

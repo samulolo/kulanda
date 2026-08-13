@@ -16,6 +16,10 @@ interface ProductImageProps {
   fit?: "cover" | "contain";
   /** Respiro interno antes da foto — só faz sentido com fit="contain". */
   imagePadding?: string;
+  /** Cor de fundo por trás da foto. Por omissão a superfície neutra branca;
+   * pode passar-se um tom diferente (ex.: o mesmo bege suave dos cartões de
+   * categoria) para os cartões de produto. */
+  bgClassName?: string;
 }
 
 export default function ProductImage({
@@ -31,12 +35,13 @@ export default function ProductImage({
   bordered = true,
   fit = "cover",
   imagePadding = "",
+  bgClassName = "bg-[var(--surface)]",
 }: ProductImageProps) {
   if (image) {
     const fitClass = fit === "contain" ? "object-contain" : "object-cover";
     return (
       <div
-        className={`relative overflow-hidden bg-[var(--surface)] ${
+        className={`relative overflow-hidden ${bgClassName} ${
           bordered ? "border border-[var(--border)]" : ""
         } ${className}`}
       >

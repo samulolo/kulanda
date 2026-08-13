@@ -51,7 +51,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           bordered={false}
           fit="contain"
           imagePadding="p-6 sm:p-8"
-          className="h-56 w-full rounded-2xl bg-[var(--surface)] sm:h-72"
+          className="h-56 w-full rounded-2xl sm:h-72"
+          bgClassName="bg-[var(--accent-soft)]/70"
           iconClassName="h-20 w-20 transition-transform duration-500 group-hover:scale-105"
         />
         <button

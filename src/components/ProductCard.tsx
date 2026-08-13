@@ -2,7 +2,7 @@
 
 import { useState, type MouseEvent } from "react";
 import Link from "next/link";
-import { Heart, Check } from "lucide-react";
+import { Heart, Check, ShoppingCart } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { formatPrice } from "@/lib/format";
 import { useCart } from "@/lib/cart-context";
@@ -72,11 +72,18 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       </div>
 
       <div className="flex flex-col gap-1.5 px-1 pb-1">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-2 text-sm text-[var(--foreground)] transition-colors group-hover:text-[var(--muted)]">
-            {product.name}
-          </h3>
-          <div className="flex shrink-0 flex-col items-end">
+        <h3 className="line-clamp-2 text-sm text-[var(--foreground)] transition-colors group-hover:text-[var(--muted)]">
+          {product.name}
+        </h3>
+
+        {product.features[0] && (
+          <p className="line-clamp-1 text-xs text-[var(--muted)]">
+            {product.features[0]}
+          </p>
+        )}
+
+        <div className="mt-1 flex items-end justify-between gap-2">
+          <div className="flex flex-col">
             {product.compareAtPrice && (
               <span className="text-xs text-[var(--muted)] line-through">
                 {formatPrice(product.compareAtPrice)}
@@ -86,26 +93,20 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               {formatPrice(product.price)}
             </span>
           </div>
+
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            aria-label={added ? "Adicionado ao carrinho" : "Adicionar ao carrinho"}
+            className={`btn-lift flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors ${
+              added
+                ? "border-[var(--accent)] bg-[var(--accent)] text-white"
+                : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-white"
+            }`}
+          >
+            {added ? <Check className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" strokeWidth={1.8} />}
+          </button>
         </div>
-
-        {product.features[0] && (
-          <p className="line-clamp-1 text-xs text-[var(--muted)]">
-            {product.features[0]}
-          </p>
-        )}
-
-        <button
-          type="button"
-          onClick={handleAddToCart}
-          className={`btn-lift mt-1 flex w-fit items-center justify-center gap-1.5 self-start rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            added
-              ? "border-[var(--accent)] bg-[var(--accent)] text-white"
-              : "border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-white"
-          }`}
-        >
-          {added && <Check className="h-3 w-3" />}
-          {added ? "Adicionado" : "Adicionar ao carrinho"}
-        </button>
       </div>
     </Link>
   );

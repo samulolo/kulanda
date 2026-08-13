@@ -15,7 +15,7 @@ const categoryTiles: {
     id: "carteiras",
     title: "Carteiras Magnéticas",
     tagline: "Compatível com MagSafe",
-    image: "/products/carteira-magnetica-gerle-textura-preta.webp",
+    image: "/products/carteira-magnetica-grafite-apoio.webp",
   },
   {
     id: "microfones",
@@ -121,26 +121,26 @@ export default async function Home() {
           Categorias
         </h2>
 
-        <div className="scrollbar-hide flex snap-x snap-mandatory gap-x-8 gap-y-6 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0">
+        <div className="scrollbar-hide flex snap-x snap-mandatory gap-x-5 gap-y-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-4 sm:overflow-visible sm:pb-0">
           {categoryTiles.map((category, index) => (
             <Link
               key={category.id}
               href={`/produtos?categoria=${category.id}`}
-              className="animate-fade-up group flex w-20 shrink-0 snap-start flex-col items-center gap-3 text-center sm:w-auto"
+              className="animate-fade-up group flex w-16 shrink-0 snap-start flex-col items-center gap-2 text-center sm:w-auto"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <span className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-105 sm:h-24 sm:w-24">
-                <span className="absolute inset-3">
+              <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-[var(--border)] transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20">
+                <span className="absolute inset-2">
                   <Image
                     src={category.image}
                     alt=""
                     fill
-                    sizes="96px"
+                    sizes="80px"
                     className="object-contain"
                   />
                 </span>
               </span>
-              <span className="text-sm font-medium leading-snug text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+              <span className="text-xs font-medium leading-snug text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
                 {category.title}
               </span>
             </Link>

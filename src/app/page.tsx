@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { Wallet, Mic, Lightbulb, Camera, type LucideIcon } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
@@ -8,41 +8,32 @@ import { getAllProducts, type Product } from "@/lib/products";
 const categoryTiles: {
   id: Product["category"];
   title: string;
-  description: string;
-  image: string;
-  span: string;
+  tagline: string;
+  Icon: LucideIcon;
 }[] = [
   {
     id: "carteiras",
     title: "Carteiras Magnéticas",
-    description:
-      "Ímã forte compatível com MagSafe, para diversos modelos de iPhone.",
-    image: "/products/carteira-magnetica-gerle-textura-preta.webp",
-    span: "lg:col-span-3",
+    tagline: "Compatível com MagSafe",
+    Icon: Wallet,
   },
   {
     id: "microfones",
     title: "Microfones de Lapela",
-    description:
-      "Opções sem fio, ideais para vlogs, entrevistas, reuniões e criação de conteúdo.",
-    image: "/products/microfone-lapela-duplo-typec.webp",
-    span: "lg:col-span-3",
+    tagline: "Sem fio, para criar conteúdo",
+    Icon: Mic,
   },
   {
     id: "iluminacao",
     title: "Ring Lights Magnéticos",
-    description:
-      "Luz de preenchimento com encaixe MagSafe, espelho embutido e design dobrável para selfies e vídeos.",
-    image: "/products/ring-light-magnetico.webp",
-    span: "lg:col-span-3",
+    tagline: "Luz de preenchimento portátil",
+    Icon: Lightbulb,
   },
   {
     id: "tripes",
     title: "Tripés e Suportes",
-    description:
-      "Tripé e vara de selfie com luz de preenchimento e comando Bluetooth remoto — 3 em 1 para criar conteúdo.",
-    image: "/products/tripe-selfie-stick-em-uso.webp",
-    span: "lg:col-span-3",
+    tagline: "3 em 1, com comando remoto",
+    Icon: Camera,
   },
 ];
 
@@ -125,6 +116,43 @@ export default async function Home() {
 
       <TrustBar />
 
+      <section className="flex flex-col gap-6">
+        <div className="flex flex-col gap-1">
+          <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
+            Explorar
+          </p>
+          <div className="flex items-center gap-3">
+            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
+              Categorias
+            </h2>
+            <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {categoryTiles.map((category, index) => (
+            <Link
+              key={category.id}
+              href={`/produtos?categoria=${category.id}`}
+              className="card-lift animate-fade-up group flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5"
+              style={{ animationDelay: `${index * 80}ms` }}
+            >
+              <div>
+                <h3 className="font-serif text-base font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
+                  {category.title}
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
+                  {category.tagline}
+                </p>
+              </div>
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[var(--accent-soft)] transition-transform duration-300 group-hover:scale-110">
+                <category.Icon strokeWidth={1.6} className="h-5 w-5 text-[var(--accent-dark)]" />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="flex flex-col gap-8">
         <div className="flex items-end justify-between">
           <div className="flex flex-col gap-1">
@@ -180,59 +208,6 @@ export default async function Home() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
           {destaques.map((product, index) => (
             <ProductCard key={product.slug} product={product} index={index} />
-          ))}
-        </div>
-      </section>
-
-      <section className="flex flex-col gap-8">
-        <div className="flex flex-col gap-1">
-          <p className="animate-text-reveal text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-            Explorar
-          </p>
-          <div className="flex items-center gap-3">
-            <h2 className="animate-text-reveal font-serif text-3xl font-semibold text-[var(--foreground)]" style={{ animationDelay: '0.1s' }}>
-              Categorias
-            </h2>
-            <div className="animate-accent-width h-1 w-12 bg-[var(--accent)] rounded-full"></div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
-          {categoryTiles.map((category, index) => (
-            <Link
-              key={category.id}
-              href={`/produtos?categoria=${category.id}`}
-              className={`card-lift animate-fade-up group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] ${category.span}`}
-              style={{ animationDelay: `${index * 80}ms` }}
-            >
-              <div className="relative h-48 w-full overflow-hidden sm:h-56">
-                <Image
-                  src={category.image}
-                  alt={category.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/5 transition-opacity duration-300 group-hover:from-black/50" />
-              </div>
-              <div className="flex flex-1 flex-col justify-between gap-4 p-6">
-                <div>
-                  <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--accent)]">
-                    Categoria
-                  </p>
-                  <h3 className="mt-2 font-serif text-lg font-semibold text-[var(--foreground)] transition-colors duration-300 group-hover:text-[var(--accent)]">
-                    {category.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] group-hover:text-[var(--foreground)] transition-colors duration-300">
-                    {category.description}
-                  </p>
-                </div>
-                <span className="flex w-fit items-center gap-1.5 text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-300">
-                  Explorar coleção
-                  <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
-                </span>
-              </div>
-            </Link>
           ))}
         </div>
       </section>

@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { Wallet, Mic, Lightbulb, Camera, type LucideIcon } from "lucide-react";
+import type { ComponentType } from "react";
+import { Wallet, Mic, Lightbulb } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import TrustBar from "@/components/TrustBar";
+import TripodIcon from "@/components/TripodIcon";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
 import { getAllProducts, type Product } from "@/lib/products";
 
@@ -9,7 +11,7 @@ const categoryTiles: {
   id: Product["category"];
   title: string;
   tagline: string;
-  Icon: LucideIcon;
+  Icon: ComponentType<{ className?: string; strokeWidth?: number }>;
 }[] = [
   {
     id: "carteiras",
@@ -33,7 +35,7 @@ const categoryTiles: {
     id: "tripes",
     title: "Tripés e Suportes",
     tagline: "3 em 1, com comando remoto",
-    Icon: Camera,
+    Icon: TripodIcon,
   },
 ];
 

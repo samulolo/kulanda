@@ -28,6 +28,7 @@ interface OrderRow {
   currency: string;
   status: string;
   created_at: string;
+  confirmation_email_sent_at: string | null;
   order_items: OrderItemRow[];
 }
 
@@ -45,6 +46,7 @@ export default async function AdminEncomendasPage() {
     .from("orders")
     .select(
       `id, reference, email, customer_name, phone, total, currency, status, created_at,
+       confirmation_email_sent_at,
        order_items ( id, product_slug, name, unit_price, quantity, line_total )`
     )
     .order("created_at", { ascending: false });
@@ -109,6 +111,7 @@ export default async function AdminEncomendasPage() {
                 <th className="px-4 py-3 font-medium">Artigos</th>
                 <th className="px-4 py-3 font-medium">Total</th>
                 <th className="px-4 py-3 font-medium">Estado</th>
+                <th className="px-4 py-3 font-medium">E-mail</th>
               </tr>
             </thead>
             <tbody>
@@ -135,6 +138,15 @@ export default async function AdminEncomendasPage() {
                   </td>
                   <td className="px-4 py-3">
                     <StatusSelect orderId={order.id} status={order.status} />
+                  </td>
+                  <td className="px-4 py-3">
+                    {order.confirmation_email_sent_at ? (
+                      <span className="text-xs text-muted" title={dateFmt.format(new Date(order.confirmation_email_sent_at))}>
+                        ✓ enviado
+                      </span>
+                    ) : (
+                      <span className="text-xs font-medium text-red-600">✗ não enviado</span>
+                    )}
                   </td>
                 </tr>
               ))}

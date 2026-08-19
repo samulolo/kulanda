@@ -4,9 +4,10 @@
 -- Stripe mas a gravação da encomenda falhou silenciosamente, por isso
 -- nunca ficou registada nem o e-mail de confirmação automático saiu.
 --
--- stripe_session_id é um valor manual (não é uma sessão real da Stripe) só
--- para satisfazer a coluna "not null unique" — se tiveres o ID real da
--- sessão no dashboard da Stripe, diz-me para corrigir.
+-- stripe_session_id é o ID real da sessão (dado pelo dono da loja a partir
+-- do dashboard da Stripe); reference é calculada da mesma forma que o
+-- webhook calcula normalmente (últimos 8 caracteres do ID, maiúsculas),
+-- para ficar indistinguível de uma encomenda processada automaticamente.
 with novo_pedido as (
   insert into orders (
     stripe_session_id, reference, email, customer_name, shipping_address,
@@ -14,8 +15,8 @@ with novo_pedido as (
     confirmation_email_sent_at
   )
   values (
-    'manual_kambolongunga_tripe_01',
-    'MANUAL01',
+    'cs_live_a17FWf7s4emaZm4iikIwrbeu29xB5d5P2RXAllFUPNxVqpAMAGe0G5PLBJ',
+    'E0G5PLBJ',
     'kambolongunga@gmail.com',
     null,
     null,
